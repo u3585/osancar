@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>자동차 명의변경 필요서류 안내</title>
+    <title>자동차 공동명의 관련 신청 서류 안내</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; padding: 20px; background-color: #f8f9fa; line-height: 1.5; }
         .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
@@ -27,20 +27,20 @@
 <body>
 
 <div class="container">
-    <h2>🚘 자동차 명의변경 서류 안내</h2>
+    <h2>🚘 자동차 공동명의 관련 신청 서류 안내</h2>
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
-        <label for="transferType">1. 명의 변경 유형을 선택하세요</label>
+        <label for="transferType">1. 공동명의 변경 유형을 선택하세요</label>
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="A_to_AB">단독명의(A) ➔ 공동명의(A+B)</option>
-            <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A) [B 지분 이전]</option>
+            <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A)</option>
         </select>
     </div>
 
     <!-- 2단계: 방문자 구성 -->
     <div class="form-group">
-        <label for="visitor">2. 창구 방문자를 선택하세요</label>
+        <label for="visitor">2. 차량등록사업소 방문자를 선택하세요</label>
         <select id="visitor" onchange="calculateDocs()">
             <!-- JavaScript로 동적 변경됨 -->
         </select>
@@ -48,7 +48,7 @@
 
     <!-- 결과 출력 영역 -->
     <div class="result-card">
-        <h3>📄 준비해야 할 구비서류</h3>
+        <h3>📄 신청서 작성 및 준비물</h3>
         <ul id="docList"></ul>
     </div>
 
@@ -109,71 +109,71 @@ function calculateDocs() {
 
     if (type === "A_to_AB") {
         // [유형 1] 단독명의(A) -> 공동명의(A+B)
-        const baseDocs = ["자동차 이전등록신청서", "자동차 양도증명서", "공동명의 조서"];
+        const baseDocs = ["2번 신청서 : 자동차 이전등록신청서", "3번 신청서 : 자동차 양도증명서", "10번 신청서 : 공동명의 조서"];
         
         switch (visitor) {
             case "both":
-                docs = [...baseDocs, "A 신분증", "B 신분증"];
+                docs = [...baseDocs, "A 신분증 지참", "B 신분증 지참"];
                 break;
             case "only_B":
                 docs = [
                     ...baseDocs,
-                    "B 신분증",
-                    "<span class='badge'>필수</span> A 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서"
+                    "<span class='badge'>필수</span> A의 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> A의 도장이 찍힌 자동차 양도증명서",
+                    "B 신분증 지참"
                 ];
                 break;
             case "only_A":
                 docs = [
                     ...baseDocs,
-                    "A 신분증",
-                    "B 신분증",
-                    "B 도장"
+                    "A 신분증 지참",
+                    "B 신분증 지참",
+                    "B 도장 지참"
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "<span class='badge'>필수</span> A 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서",
-                    "B 신분증",
-                    "B 도장",
-                    "방문한 대리인 신분증"
+                    "<span class='badge'>필수</span> A의 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> A의 도장이 찍힌 자동차 양도증명서",
+                    "B 신분증 지참",
+                    "B 도장 지참",
+                    "방문한 대리인 신분증 지참"
                 ];
                 break;
         }
     } else if (type === "AB_to_A") {
         // [유형 2] 공동명의(A+B) -> 단독명의(A)
-        const baseDocs = ["자동차 이전등록신청서", "자동차 양도증명서"];
+        const baseDocs = ["2번 신청서 : 자동차 이전등록신청서", "3번 신청서 : 자동차 양도증명서"];
         
         switch (visitor) {
             case "both":
-                docs = [...baseDocs, "A 신분증", "B 신분증"];
+                docs = [...baseDocs, "A 신분증 지참", "B 신분증 지참"];
                 break;
             case "only_A":
                 docs = [
                     ...baseDocs,
-                    "A 신분증",
-                    "<span class='badge'>필수</span> B 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> B 도장이 찍힌 자동차 양도증명서"
+                    "<span class='badge'>필수</span> B의 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> B의 도장이 찍힌 자동차 양도증명서",
+                    "A 신분증 지참"
                 ];
                 break;
             case "only_B":
                 docs = [
                     ...baseDocs,
-                    "B 신분증",
-                    "A 신분증",
-                    "A 도장"
+                    "B 신분증 지참",
+                    "A 신분증 지참",
+                    "A 도장 지참"
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "<span class='badge'>필수</span> B 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서",
-                    "B 신분증",
-                    "B 도장",
-                    "방문한 대리인 신분증"
+                    "<span class='badge'>필수</span> B의 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> B의 도장이 찍힌 자동차 양도증명서",
+                    "B 신분증 지참",
+                    "B 도장 지참",
+                    "방문한 대리인 신분증 지참"
                 ];
                 break;
         }
