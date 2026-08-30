@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자동차 공동명의 관련 서류 안내</title>
+    <style>
+        body { font-family: 'Pretendard', sans-serif; padding: 20px; background-color: #f8f9fa; line-height: 1.5; }
+        .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h2 { margin-top: 0; color: #111; border-bottom: 2px solid #228be6; padding-bottom: 12px; font-size: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+        select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; }
+        .result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 25px; }
+        .result-card h3 { margin-top: 0; color: #1c7ed6; font-size: 16px; margin-bottom: 10px; }
+        ul { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; font-size: 14.5px; }
+        .badge { background: #e63946; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; margin-right: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🚘 자동차 공동명의 관련 서류 안내</h2>
+    
+    <div class="form-group">
+        <label for="transferType">1. 공동명의 변경 유형을 선택하세요</label>
+        <select id="transferType" onchange="updateVisitorOptions()">
+            <option value="A_to_AB">단독명의(A) ➔ 공동명의(A+B)</option>
+            <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="visitor">2. 방문자를 선택하세요</label>
+        <select id="visitor" onchange="calculateDocs()">
+            </select>
+    </div>
+
+    <div class="result-card">
+        <h3>📄 작성해야될 신청서류</h3>
+        <ul id="docList"></ul>
+    </div>
+</div>
+
+<script>
+// 방문자 옵션 텍스트 정의
+const visitorOptions = {
+    A_to_AB: [
+        { value: "both", label: "원 소유자(A)와 추가될 사람(B) 둘 다 방문" },
+        { value: "only_B", label: "추가될 사람(B)만 방문 (A 미방문)" },
+        { value: "only_A", label: "원 소유자(A)만 방문 (B 미방문)" },
+        { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
+    ],
+    AB_to_A: [
+        { value: "both", label: "A와 B 둘 다 방문" },
+        { value: "only_A", label: "명의를 받는 사람(A)만 방문 (B 미방문)" },
+        { value: "only_B", label: "명의를 넘기는 사람(B)만 방문 (A 미방문)" },
+        { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
+    ]
+};
+
+// 1단계 선택에 따라 2단계 드롭다운 변경
+function updateVisitorOptions() {
+    const type = document.getElementById("transferType").value;
+    const visitorSelect = document.getElementById("visitor");
+    
+    visitorSelect.innerHTML = visitorOptions[type]
+        .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
+        .join('');
+        
+    calculateDocs();
+}
+
+// 조건별 필수 서류 계산 로직
+function calculateDocs() {
+    const type = document.getElementById("transferType").value;
+    const visitor = document.getElementById("visitor").value;
+    const docList = document.getElementById("docList");
+    
+    let docs = [];
+
+    if (type === "A_to_AB") {
+        // [유형 1] 단독명의(A) -> 공동명의(A+B)
+        const baseDocs = ["2번 자동차 이전등록신청서", "3번 자동차 양도증명서", "10번 공동명의 조서"];
+        
+        switch (visitor) {
+            case "both":
+                docs = [...baseDocs, "A 신분증 지참", "B 신분증 지참"];
+                break;
+            case "only_B":
+                docs = [
+                    ...baseDocs,
+                    "B 신분증",
+                    "<span class='badge'>지참</span> A 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> 자동차 양도증명서에 A 인장이 찍혀야함"
+                ];
+                break;
+            case "only_A":
+                docs = [
+                    ...baseDocs,
+                    "A 신분증",
+                    "B 신분증",
+                    "B 도장"
+                ];
+                break;
+            case "agent":
+                docs = [
+                    ...baseDocs,
+                    "<span class='badge'>지참</span> A 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> 자동차 양도증명서에 A 인장이 찍혀야함",
+                    "B 신분증",
+                    "B 도장",
+                    "방문한 대리인 신분증"
+                ];
+                break;
+        }
+    } else if (type === "AB_to_A") {
+        // [유형 2] 공동명의(A+B) -> 단독명의(A)
+        const baseDocs = ["2번 자동차 이전등록신청서", "3번 자동차 양도증명서"];
+        
+        switch (visitor) {
+            case "both":
+                docs = [...baseDocs, "A 신분증", "B 신분증"];
+                break;
+            case "only_A":
+                docs = [
+                    ...baseDocs,
+                    "A 신분증",
+                    "<span class='badge'>지참</span> B 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> 자동차 양도증명서에 B의 인장이 찍혀야함"
+                ];
+                break;
+            case "only_B":
+                docs = [
+                    ...baseDocs,
+                    "B 신분증",
+                    "A 신분증",
+                    "A 도장"
+                ];
+                break;
+            case "agent":
+                docs = [
+                    ...baseDocs,
+                    "<span class='badge'>지참</span> B 자동차 매도용 인감증명서",
+                    "<span class='badge'>확인</span> 자동차 양도증명서에 B의 인장이 찍혀야함",
+                    "B 신분증",
+                    "B 도장",
+                    "방문한 대리인 신분증"
+                ];
+                break;
+        }
+    }
+
+    // 결과 렌더링
+    docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
+}
+
+// 최초 실행
+updateVisitorOptions();
+</script>
+
+</body>
+</html>
