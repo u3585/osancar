@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자동차 이전등록 필요서류 안내</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background-color: #f4f7f6; }
+        .card { background: white; padding: 25px; border-radius: 12px; max-width: 500px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 0 auto; }
+        h2 { margin-top: 0; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .option-group { margin: 20px 0; display: flex; flex-direction: column; gap: 12px; }
+        label { font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        input[type="checkbox"] { width: 18px; height: 18px; }
+        #result-box { margin-top: 25px; padding: 15px; background: #e9ecef; border-radius: 8px; }
+        ul { margin: 8px 0 0 0; padding-left: 20px; }
+        li { margin-bottom: 6px; }
+        .highlight { color: #d9534f; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🚗 자동차 이전등록 신청서 안내</h2>
+    <p>방문하지 못하는 당사자를 체크해 주세요.</p>
+    
+    <div class="option-group">
+        <label><input type="checkbox" id="sellerAbsence" onchange="checkDocuments()"> 🔴 양도인(매도인) 미방문</label>
+        <label><input type="checkbox" id="buyerAbsence" onchange="checkDocuments()"> 🔵 양수인(매수인) 미방문</label>
+    </div>
+
+    <div id="result-box">
+        <h3>📄 준비해야 할 신청서</h3>
+        <ul id="docList"></ul>
+    </div>
+</div>
+
+<script>
+function checkDocuments() {
+    const isSellerAbsent = document.getElementById("sellerAbsence").checked;
+    const isBuyerAbsent = document.getElementById("buyerAbsence").checked;
+    const docList = document.getElementById("docList");
+
+    // 기본 필수 서류 (언제나 필요)
+    let docs = [
+        "자동차 이전등록신청서 1부",
+        "자동차 양도증명서 1부"
+    ];
+
+    // 조건별 서류 추가
+    if (!isSellerAbsent && !isBuyerAbsent) {
+        // 1. 둘 다 방문
+        docs.push("양도인 신분증 원본");
+        docs.push("양도인 신분증 원본");
+    } else {
+        // 2. 양도인 미방문 시
+        if (isSellerAbsent) {
+            docs.push("<span class='highlight'>[양도인 관련]</span> 자동차 매도용 인감증명서 1부");
+            docs.push("<span class='highlight'>[양도인 관련]</span> 매도인 인감도장이 찍힌 자동차 양도증명서");
+        } else {
+            docs.push("양도인 신분증 원본");
+        }
+
+        // 3. 양수인 미방문 시
+        if (isBuyerAbsent) {
+            docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 신분증 사본 1부");
+            docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 도장이 찍힌 위임장 1부");
+        } else {
+            docs.push("양수인 신분증 원본");
+        }
+
+        // 4. 둘 다 미방문 (대리인 접수)
+        if (isSellerAbsent && isBuyerAbsent) {
+            docs.push("<span class='highlight'>[대리인]</span> 방문한 대리인 신분증 원본");
+        }
+    }
+
+    // 화면에 리스트 출력
+    docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
+}
+
+// 페이지 로드 시 초기 상태 실행
+checkDocuments();
+</script>
+
+</body>
+</html>
