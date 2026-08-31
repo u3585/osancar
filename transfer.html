@@ -126,9 +126,11 @@ function calculateDocs() {
             case "only_A":
                 docs = [
                     ...baseDocs,
+                    "9번 신청서 위임장 작성 후 B 도장을 날인해야함",
+                    "B 도장 지참",
                     "A 신분증 지참",
                     "B 신분증 지참",
-                    "B 도장 지참"
+                    
                 ];
                 break;
             case "agent":
@@ -136,6 +138,7 @@ function calculateDocs() {
                     ...baseDocs,
                     "<span class='badge'>필수</span> A의 자동차 매도용 인감증명서",
                     "<span class='badge'>확인</span> A의 도장이 찍힌 자동차 양도증명서",
+                    "9번 신청서 위임장 작성 후 B 도장을 날인해야함",
                     "B 신분증 지참",
                     "B 도장 지참",
                     "방문한 대리인 신분증 지참"
@@ -161,9 +164,11 @@ function calculateDocs() {
             case "only_B":
                 docs = [
                     ...baseDocs,
+                    "9번 신청서 위임장 작성 후 A 도장을 날인해야함" 
+                    "A 도장 지참"
                     "B 신분증 지참",
                     "A 신분증 지참",
-                    "A 도장 지참"
+                    
                 ];
                 break;
             case "agent":
@@ -171,8 +176,8 @@ function calculateDocs() {
                     ...baseDocs,
                     "<span class='badge'>필수</span> B의 자동차 매도용 인감증명서",
                     "<span class='badge'>확인</span> B의 도장이 찍힌 자동차 양도증명서",
-                    "B 신분증 지참",
-                    "B 도장 지참",
+                    "9번 신청서 위임장 작성 후 A 도장을 날인해야함"
+                    "A 신분증 지참"
                     "방문한 대리인 신분증 지참"
                 ];
                 break;
