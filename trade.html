@@ -48,15 +48,15 @@ function checkDocuments() {
     // 조건별 서류 추가
     if (!isSellerAbsent && !isBuyerAbsent) {
         // 1. 둘 다 방문
-        docs.push("양도인 신분증 원본");
-        docs.push("양도인 신분증 원본");
+        docs.push("양도인 신분증 지참");
+        docs.push("양수인 신분증 지참");
     } else {
         // 2. 양도인 미방문 시
         if (isSellerAbsent) {
             docs.push("<span class='highlight'>[양도인 관련]</span> 자동차 매도용 인감증명서 1부");
             docs.push("<span class='highlight'>[양도인 관련]</span> 매도인 인감도장이 찍힌 자동차 양도증명서");
         } else {
-            docs.push("양도인 신분증 원본");
+            docs.push("양도인 신분증 지참");
         }
 
         // 3. 양수인 미방문 시
@@ -64,12 +64,12 @@ function checkDocuments() {
             docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 신분증 사본 1부");
             docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 도장이 찍힌 위임장 1부");
         } else {
-            docs.push("양수인 신분증 원본");
+            docs.push("양수인 신분증 지참");
         }
 
         // 4. 둘 다 미방문 (대리인 접수)
         if (isSellerAbsent && isBuyerAbsent) {
-            docs.push("<span class='highlight'>[대리인]</span> 방문한 대리인 신분증 원본");
+            docs.push("<span class='highlight'>[대리인]</span> 방문한 대리인 신분증 지참");
         }
     }
 
