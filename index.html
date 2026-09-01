@@ -1,3 +1,137 @@
-<html>
-  < 자동차 등록 사업소에서 자동차(이륜차) 등록에 관련된 신청 서류 안내 >
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비공식 차량등록사업소</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: #222;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* 상세 내용 영역 */
+        #detail-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #eef2ff;
+            border-radius: 8px;
+            display: none; /* 처음에는 숨김 */
+        }
+
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>비공식 차량등록사업소</h1>
+</header>
+
+<div class="container">
+    <h2>원하는 서비스를 클릭하시오</h2>
+
+    <div class="grid">
+        <div class="card" onclick="showDetail(1)">
+            <h3>자동차 명의이전(매매)</h3>
+            <p>자동차 중고거래 혹은 가족간 명의이전</p>
+        </div>
+
+        <div class="card" onclick="showDetail(2)">
+            <h3>자동차 공동명의 관련</h3>
+            <p>단독명의에서 공동명의 추가, 공동명의에서 단독명의로 변경</p>
+        </div>
+
+        <div class="card" onclick="showDetail(3)">
+            <h3>자동차 신규등록</h3>
+            <p>신차 구매 후 등록하기</p>
+        </div>
+
+        <div class="card" onclick="showDetail(4)">
+            <h3>이륜차 명의이전(매매)</h3>
+            <p>번호판 살아있는 이륜차 명의변경(매매)</p>
+        </div>
+
+        <div class="card" onclick="showDetail(5)">
+            <h3>이륜차 명의이전(중고구매)</h3>
+            <p>폐지된 이륜차 구매</p>
+        </div>
+
+        <div class="card" onclick="showDetail(6)">
+            <h3>이륜차 폐지</h3>
+            <p>이륜차 번호판 반납</p>
+        </div>
+    </div>
+
+    <!-- 클릭 시 내용이 표시되는 영역 -->
+    <div id="detail-box"></div>
+</div>
+
+<script>
+    function showDetail(id) {
+        const detailBox = document.getElementById("detail-box");
+
+        const details = {
+            1: "<h2>자동차 명의이전 안내</h2><p>A(판매자, 양도인, 갑)라는 사람이 자동차를 B(구매자, 양수인, 을)에게 명의이전 한다.</p>",
+            2: "<h2>공동명의 관련 안내</h2><p>단독명의의 자동차를 공동명의로 하거나 공동명의의 자동차를 단독명의로 변경한다.</p>",
+            3: "<h2>자동차 신규등록</h2><p>신차를 구매하여 등록을 하고 새로운 번호판을 받는다.</p>",
+            4: "<h2>이륜차 명의이전(매매)</h2><p>번호판이 살아있는 이륜차를 구매한다.</p>",
+            5: "<h2>이륜차 명의이전(중고구매)</h2><p>폐지되어 번호판이 없는 이륜차를 구매한다.</p>",
+            6: "<h2>이륜차 폐지</h2><p>이륜차를 더 이상 몰지 않고 번호판을 반납하고 싶다.</p>"
+        };
+
+        detailBox.innerHTML = details[id];
+        detailBox.style.display = "block";
+        detailBox.scrollIntoView({ behavior: "smooth" });
+    }
+</script>
+
+</body>
 </html>
