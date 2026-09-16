@@ -28,11 +28,11 @@
 <body>
 
 <div class="container">
-    <h2>🚘 자동차 명의변경 서류 안내</h2>
+    <h2>🚘 자동차 공동명의 관련 서류 안내</h2>
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
-        <label for="transferType">1. 명의 변경 유형을 선택하세요</label>
+        <label for="transferType">1. 공동명의 변경 유형을 선택하세요</label>
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="A_to_AB">단독명의(A) ➔ 공동명의(A+B)</option>
             <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A) [B 지분 이전]</option>
@@ -66,13 +66,13 @@
 // 방문자 옵션 텍스트 정의
 const visitorOptions = {
     A_to_AB: [
-        { value: "both", label: "구 소유자(A)와 추가될 사람(B) 둘 다 방문" },
-        { value: "only_B", label: "추가될 사람(B)만 방문 (A 미방문)" },
-        { value: "only_A", label: "구 소유자(A)만 방문 (B 미방문)" },
+        { value: "both", label: "기존 명의자(A)와 명의 추가자(B) 둘 다 방문" },
+        { value: "only_B", label: "명의 추가자(B)만 방문 (A 미방문)" },
+        { value: "only_A", label: "기존 명의자(A)만 방문 (B 미방문)" },
         { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
     ],
     AB_to_A: [
-        { value: "both", label: "A와 B 둘 다 방문" },
+        { value: "both", label: "기존 명의자(A + B) 모두 방문" },
         { value: "only_A", label: "명의를 받는 사람(A)만 방문 (B 미방문)" },
         { value: "only_B", label: "명의를 넘기는 사람(B)만 방문 (A 미방문)" },
         { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
