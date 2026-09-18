@@ -4,134 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비공식 차량등록사업소</title>
-
+    <!-- Tailwind CSS CDN for modern styling and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #333;
-        }
-
-        header {
-            background: #222;
-            color: #fff;
-            padding: 15px 20px;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-            background: #fff;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: #fafafa;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        /* 상세 내용 영역 */
-        #detail-box {
-            margin-top: 30px;
-            padding: 20px;
-            background: #eef2ff;
-            border-radius: 8px;
-            display: none; /* 처음에는 숨김 */
-        }
-
-        @media (max-width: 1024px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen flex flex-col justify-between text-slate-800">
 
-<header>
-    <h1>비공식 차량등록사업소</h1>
-</header>
-
-<div class="container">
-    <h2>원하는 서비스를 클릭하시오</h2>
-
-    <div class="grid">
-        <div class="card" onclick="showDetail(1)">
-            <h3>자동차 명의이전(매매)</h3>
-            <p>자동차 중고거래 혹은 가족간 명의이전</p>
+    <header class="w-full py-6 px-4 md:px-8 text-center bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-4xl mx-auto flex items-center justify-center space-x-3">
+            <div class="bg-blue-600 text-white p-3 rounded-2xl shadow-md">
+                <i class="fa-solid fa-car text-xl md:text-2xl"></i>
+            </div>
+            <h1 class="text-xl md:text-3xl font-bold tracking-tight text-slate-900">비공식 차량등록사업소</h1>
         </div>
+    </header>
 
-        <div class="card" onclick="showDetail(2)">
-            <h3>자동차 공동명의 관련</h3>
-            <p>단독명의에서 공동명의 추가, 공동명의에서 단독명의로 변경</p>
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
+        <div class="w-full max-w-4xl mx-auto">
+            
+            <!-- Title & Subtitle banner -->
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+                    원하는 서비스를 선택하세요
+                </h2>
+                <p class="text-sm sm:text-base text-slate-600 max-w-md mx-auto">
+                    필요한 업무를 선택하면 안내 페이지로 이동합니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                
+                <!-- Button 1: 자동차 명의이전 -->
+                <a href="trade.html" class="group relative bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between transform hover:-translate-y-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-right-left"></i>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-arrow-right text-lg"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">
+                            자동차 명의이전
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            매매, 양도 등으로 인한 차량 소유자 변경 신청
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Button 2: 자동차 공동명의 -->
+                <a href="joints.html" class="group relative bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between transform hover:-translate-y-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-emerald-600 transition-colors">
+                            <i class="fa-solid fa-arrow-right text-lg"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors mb-1">
+                            자동차 공동명의
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            2인 이상 공동 소유 등록 및 지분 설정 안내
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Button 3: 이륜차(신규, 이전, 폐지) -->
+                <a href="2wheel.html" class="group relative bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between transform hover:-translate-y-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-motorcycle"></i>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-amber-600 transition-colors">
+                            <i class="fa-solid fa-arrow-right text-lg"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors mb-1">
+                            이륜차(신규, 이전, 폐지)
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            오토바이 신규등록, 명의이전 및 사용폐지 업무
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Button 4: 재발급(자동차등록증, 번호판) -->
+                <a href="re.html" class="group relative bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between transform hover:-translate-y-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-purple-600 transition-colors">
+                            <i class="fa-solid fa-arrow-right text-lg"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors mb-1">
+                            재발급(자동차등록증, 번호판)
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            분실 또는 훼손된 차량등록증 및 번호판 재발급 신청
+                        </p>
+                    </div>
+                </a>
+
+            </div>
         </div>
+    </main>
 
-        <div class="card" onclick="showDetail(3)">
-            <h3>자동차 신규등록</h3>
-            <p>신차 구매 후 등록하기</p>
-        </div>
-
-        <div class="card" onclick="showDetail(4)">
-            <h3>이륜차 명의이전(매매)</h3>
-            <p>번호판 살아있는 이륜차 명의변경(매매)</p>
-        </div>
-
-        <div class="card" onclick="showDetail(5)">
-            <h3>이륜차 명의이전(중고구매)</h3>
-            <p>폐지된 이륜차 구매</p>
-        </div>
-
-        <div class="card" onclick="showDetail(6)">
-            <h3>이륜차 폐지</h3>
-            <p>이륜차 번호판 반납</p>
-        </div>
-    </div>
-
-    <!-- 클릭 시 내용이 표시되는 영역 -->
-    <div id="detail-box"></div>
-</div>
-
-<script>
-    function showDetail(id) {
-        const detailBox = document.getElementById("detail-box");
-
-        const details = {
-            1: "<h2>자동차 명의이전 안내</h2><p>A(판매자, 양도인, 갑)라는 사람이 자동차를 B(구매자, 양수인, 을)에게 명의이전 한다. 2번 이전등록신청서, 3번 양도증명서</p>",
-            2: "<h2>공동명의 관련 안내</h2><p>공동명의 추가(2번 이전등록신청서, 3번 양도증명서, 10번 공동명의조서), 공동명의에서 단독명의로 변경(2번 이전등록신청서, 3번 양도증명서)</p>",
-            3: "<h2>자동차 신규등록</h2><p>1번 신규등록 신청서</p>",
-            4: "<h2>이륜차 명의이전(매매)</h2><p>3번 양도증명서, 14번 이륜차 변경신청서</p>",
-            5: "<h2>이륜차 명의이전(중고구매)</h2><p>11번 이륜차 신규등록 신청서, 3번 양도증명서(판매자 도장 필수), 이륜차 폐지증명서, 판매자 신분증 사본</p>",
-            6: "<h2>이륜차 폐지</h2><p>12번 이륜차 폐지 신청서, 이륜차 번호판</p>"
-        };
-
-        detailBox.innerHTML = details[id];
-        detailBox.style.display = "block";
-        detailBox.scrollIntoView({ behavior: "smooth" });
-    }
-</script>
+    <footer class="w-full py-6 px-4 text-center text-xs text-slate-500 bg-white/50 border-t border-slate-100">
+        <p>비공식 차량등록사업소. All lefts reserved.</p>
+    </footer>
 
 </body>
 </html>
