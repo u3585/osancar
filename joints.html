@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>자동차 명의변경 필요서류 안내</title>
+    <title>자동차 공동명의 관련 신청서 안내</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; padding: 20px; background-color: #f8f9fa; line-height: 1.5; }
         .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
@@ -32,16 +32,16 @@
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
-        <label for="transferType">1. 명의 변경 유형을 선택하세요</label>
+        <label for="transferType">1. 명의 변경 유형을 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="A_to_AB">단독명의(A) ➔ 공동명의(A+B)</option>
-            <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A) [B 지분 이전]</option>
+            <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A)</option>
         </select>
     </div>
 
     <!-- 2단계: 방문자 구성 -->
     <div class="form-group">
-        <label for="visitor">2. 차량등록사업소 방문자를 선택하세요</label>
+        <label for="visitor">2. 차량등록사업소 방문자를 선택하세요.</label>
         <select id="visitor" onchange="calculateDocs()">
             <!-- JavaScript로 동적 변경됨 -->
         </select>
@@ -66,10 +66,10 @@
 // 방문자 옵션 텍스트 정의
 const visitorOptions = {
     A_to_AB: [
-        { value: "both", label: "원 소유자(A)와 추가될 사람(B) 둘 다 방문" },
+        { value: "both", label: "단독명의자(A)와 추가될 사람(B) 둘 다 방문" },
         { value: "only_B", label: "추가될 사람(B)만 방문 (A 미방문)" },
-        { value: "only_A", label: "원 소유자(A)만 방문 (B 미방문)" },
-        { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
+        { value: "only_A", label: "단독명의자(A)만 방문 (B 미방문)" },
+        { value: "agent", label: "대리인 방문 (A, B 모두 미방문)" }
     ],
     AB_to_A: [
         { value: "both", label: "A와 B 둘 다 방문" },
@@ -131,7 +131,7 @@ function calculateDocs() {
 
     if (type === "A_to_AB") {
         // [유형 1] 단독명의(A) -> 공동명의(A+B)
-        const baseDocs = ["자동차 이전등록신청서", "자동차 양도증명서", "공동명의 조서"];
+        const baseDocs = ["이전등록 신청서", "자동차양도증명서", "자동차 소유권 공동명의 조서"];
         
         switch (visitor) {
             case "both":
