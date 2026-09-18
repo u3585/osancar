@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>자동차 이전등록 필요서류 안내</title>
+    <title>자동차 이전등록 안내</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background-color: #f4f7f6; }
         .card { background: white; padding: 25px; border-radius: 12px; max-width: 500px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 0 auto; }
@@ -19,16 +19,16 @@
 <body>
 
 <div class="card">
-    <h2>🚗 자동차 이전등록 신청서 안내</h2>
+    <h2>🚗 자동차 이전등록(매매, 양도) 신청서 안내</h2>
     <p>방문하지 못하는 당사자를 체크해 주세요.</p>
     
     <div class="option-group">
-        <label><input type="checkbox" id="sellerAbsence" onchange="checkDocuments()"> 🔴 양도인(매도인) 미방문</label>
-        <label><input type="checkbox" id="buyerAbsence" onchange="checkDocuments()"> 🔵 양수인(매수인) 미방문</label>
+        <label><input type="checkbox" id="sellerAbsence" onchange="checkDocuments()"> 🔴 양도인(구 소유자, 판매자) 미방문</label>
+        <label><input type="checkbox" id="buyerAbsence" onchange="checkDocuments()"> 🔵 양수인(신 소유자, 구매자) 미방문</label>
     </div>
 
     <div id="result-box">
-        <h3>📄 준비해야 할 신청서</h3>
+        <h3>📄 제출해야 하는 신청서</h3>
         <ul id="docList"></ul>
     </div>
 </div>
@@ -41,8 +41,8 @@ function checkDocuments() {
 
     // 기본 필수 서류 (언제나 필요)
     let docs = [
-        "자동차 이전등록신청서 1부",
-        "자동차 양도증명서 1부"
+        "이전등록신청서",
+        "자동차양도증명서(양도인, 양수인 직접거래용)"
     ];
 
     // 조건별 서류 추가
@@ -53,16 +53,16 @@ function checkDocuments() {
     } else {
         // 2. 양도인 미방문 시
         if (isSellerAbsent) {
-            docs.push("<span class='highlight'>[양도인 관련]</span> 자동차 매도용 인감증명서 1부");
-            docs.push("<span class='highlight'>[양도인 관련]</span> 매도인 인감도장이 찍힌 자동차 양도증명서");
+            docs.push("<span class='highlight'>[양도인 관련]</span> 자동차 매도용 인감증명서");
+            docs.push("<span class='highlight'>[양도인 관련]</span> 매도인(판매자) 도장이 찍힌 자동차양도증명서");
         } else {
             docs.push("양도인 신분증 지참");
         }
 
         // 3. 양수인 미방문 시
         if (isBuyerAbsent) {
-            docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 신분증 사본 1부");
-            docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 도장이 찍힌 위임장 1부");
+            // docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 신분증");
+            docs.push("<span class='highlight'>[양수인 관련]</span> 양수인 도장이 찍힌 위임장");
         } else {
             docs.push("양수인 신분증 지참");
         }
