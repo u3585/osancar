@@ -68,9 +68,9 @@ function checkDocuments() {
             "<span class='highlight'>[대리인]</span> 방문한 대리인 신분증 지참"
         ];
         images = [
-            { src: "2-3.png", title: "이전등록 신청서 (대리인 접수용)" },
-            { src: "3-3.png", title: "자동차양도증명서 (대리인 접수용)" },
-            { src: "10-3.png", title: "위임장 및 인감증명서 관련 서식" },
+            { src: "2.png", title: "이전등록 신청서 (대리인 접수용)" },
+            { src: "3-4.png", title: "자동차양도증명서 (대리인 접수용)" },
+            { src: "10.png", title: "위임장 및 인감증명서 관련 서식" },
             { src: "add.png", title: "추가 구비 서류" }
         ];
     } else if (isSellerAbsent) {
@@ -83,8 +83,8 @@ function checkDocuments() {
             "양수인 신분증 지참"
         ];
         images = [
-            { src: "2-1.png", title: "이전등록 신청서 (양도인 미방문용)" },
-            { src: "3-1.png", title: "자동차양도증명서 (양도인 미방문용)" },
+            { src: "2.png", title: "이전등록 신청서 (양도인 미방문용)" },
+            { src: "3-2.png", title: "자동차양도증명서 (양도인 미방문용)" },
             { src: "add.png", title: "추가 구비 서류" }
         ];
     } else if (isBuyerAbsent) {
@@ -97,8 +97,8 @@ function checkDocuments() {
             "<span class='highlight'>[양수인 관련]</span> 양수인 도장이 찍힌 위임장"
         ];
         images = [
-            { src: "2-2.png", title: "이전등록 신청서 (양수인 미방문용)" },
-            { src: "3-2.png", title: "자동차양도증명서 (양수인 미방문용)" },
+            { src: "2-3.png", title: "이전등록 신청서 (양수인 미방문용)" },
+            { src: "3-3.png", title: "자동차양도증명서 (양수인 미방문용)" },
             { src: "10.png", title: "위임장 서식" }
         ];
     } else {
@@ -106,8 +106,9 @@ function checkDocuments() {
         docs = [
             "이전등록 신청서",
             "자동차양도증명서(양도인, 양수인 직접거래용)",
-            "양도인 신분증 지참",
-            "양수인 신분증 지참"
+            "양도인(판매자) 신분증 지참",
+            "양수인(구매자) 신분증 지참",
+            "*양수인(구매자) 보험 가입 필수"
         ];
         images = [
             { src: "2.png", title: "이전등록 신청서" },
