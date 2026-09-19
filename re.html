@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>재발급(자동차등록증, 등록번호판)</title>
+    <style>
+        body { font-family: 'Pretendard', sans-serif; padding: 20px; background-color: #f8f9fa; line-height: 1.5; }
+        .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h2 { margin-top: 0; color: #111; border-bottom: 2px solid #228be6; padding-bottom: 12px; font-size: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+        select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; }
+        
+        /* 필요서류 결과 카드 */
+        .result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 25px; }
+        .result-card h3 { margin-top: 0; color: #1c7ed6; font-size: 16px; margin-bottom: 10px; }
+        ul { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; font-size: 14.5px; }
+        .badge { background: #e63946; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; margin-right: 4px; }
+
+        /* 신청서 예시 이미지 영역 */
+        .image-card { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
+        .image-card h3 { color: #333; font-size: 16px; margin-bottom: 15px; text-align: left; }
+        .image-list { display: flex; flex-direction: column; gap: 15px; text-align: center; }
+        .preview-image { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>재발급(자동차등록증, 등록번호판)</h2>
+    
+    <!-- 1단계: 명의 변경 유형 -->
+    <div class="form-group">
+        <label for="transferType">1. 재발급 내용을 선택하세요.</label>
+        <select id="transferType" onchange="updateVisitorOptions()">
+            <option value="R1">자동차등록증 재발급</option>
+            <option value="R2">자동차 등록번호판 재발급</option>
+        </select>
+    </div>
+
+    <!-- 2단계: 방문자 구성 -->
+    <div class="form-group">
+        <label for="visitor">2. 창구 방문자를 선택하세요</label>
+        <select id="visitor" onchange="calculateDocs()">
+            <!-- JavaScript로 동적 변경됨 -->
+        </select>
+    </div>
+
+    <!-- 결과 출력 영역 -->
+    <div class="result-card">
+        <h3>📄 준비해야 할 구비서류</h3>
+        <ul id="docList"></ul>
+    </div>
+
+    <!-- 신청서 예시 이미지 영역 -->
+    <div class="image-card">
+        <h3>📌 신청서 작성 예시</h3>
+        <div id="imageList" class="image-list">
+            <!-- JavaScript로 조건에 맞는 이미지들이 동적 생성됨 -->
+        </div>
+    </div>
+</div>
+
+<script>
+// 방문자 옵션 텍스트 정의
+const visitorOptions = {
+    R1: [
+        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "agent", label: "대리인 방문" }        
+    ],
+    R2: [
+        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "agent", label: "대리인 방문" }
+    ]
+};
+
+// [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
+const imageMap = {
+    R1: {
+        // 1. 자동차 소유자 방문
+        owner: ["5.png"],
+        // 2. 대리인 방문
+        agent: ["5.png", "9.png"],
+          },
+    R2: {
+        // 1. 자동차 소유자 방문
+        owner: ["6.png"],
+        agent: ["6.png", "9.png"]
+    }
+};
+
+// 1단계 선택에 따라 2단계 드롭다운 변경
+function updateVisitorOptions() {
+    const type = document.getElementById("transferType").value;
+    const visitorSelect = document.getElementById("visitor");
+
+    // 방문자 드롭다운 옵션 업데이트
+    visitorSelect.innerHTML = visitorOptions[type]
+        .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
+        .join('');
+        
+    calculateDocs();
+}
+
+// 조건별 필수 서류 및 이미지 업데이트 로직
+function calculateDocs() {
+    const type = document.getElementById("transferType").value;
+    const visitor = document.getElementById("visitor").value;
+    const docList = document.getElementById("docList");
+    const imageListDiv = document.getElementById("imageList");
+    
+    // 1. 이미지 업데이트 로직
+    const images = (imageMap[type] && imageMap[type][visitor]) ? imageMap[type][visitor] : [];
+    imageListDiv.innerHTML = images
+        .map(imgSrc => `<img class="preview-image" src="${imgSrc}" alt="신청서 작성 예시">`)
+        .join('');
+
+    // 2. 서류 목록 업데이트 로직
+    let docs = [];
+
+    if (type === "R1") {
+        // [유형 1] 자동차 등록증 재발급
+        const baseDocs = ["자동차 등록증 재발급신청서"];
+        
+        switch (visitor) {
+            case "owner":
+                docs = [...baseDocs, "신분증"];
+                break;
+            case "agent":
+                docs = [...baseDocs, 
+                    "<span class='badge'>필수</span> 자동차 소유자의 도장이 찍힌 위임장",
+                    "<span class='badge'>필수</span> 자동차 소유자의 신분증",
+                    "방문한 대리인 신분증"
+                ];
+                break;
+        }
+    } else if (type === "R2") {
+        // [유형 2] 등록번호판 재발급등 신청서
+        const baseDocs = ["등록번호판 재발급등 신청서"];
+        
+        switch (visitor) {
+            
+            case "owner":
+                docs = [
+                    ...baseDocs,
+                    "[확인] 자동차 소유자의 신분증"
+                ];
+                break;
+            case "agent":
+                docs = [
+                    ...baseDocs,
+                    "<span class='badge'>필수</span> 자동차 소유자의 도장이 찍힌 위임장",
+                    "자동차 소유자 신분증",
+                    "방문한 대리인 신분증"
+                ];
+                break;
+        }
+    }
+
+    // 결과 렌더링
+    docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
+}
+
+// 최초 실행
+updateVisitorOptions();
+</script>
+
+</body>
+</html>
