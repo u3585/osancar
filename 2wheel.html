@@ -35,7 +35,7 @@
         <label for="transferType">1. 번호판 유무에 따라 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="A_to_B">이륜차 번호판을 그대로 명의이전</option>
-            <option value="C_to_N">이륜차 번호판 폐지 후 이전등록</option>
+            <option value="C_to_N">폐지된 이륜차 신규등록</option>
         </select>
     </div>
 
@@ -90,7 +90,7 @@ const imageMap = {
         agent: ["2_a_ab.png", "3_a_ab-1.png", "10_a_ab.png", "9.jpg","trade.png"]
     },
     C_to_N: {
-        // 공동명의 -> 단독명의 기본 이미지 (방문자별 필요에 따라 추가 확장 가능)
+        // 폐지된 이륜차 -> 신규등록 (방문자별 필요에 따라 추가 확장 가능)
         only_N: ["12_new.png", "3_e_trade.png"],
         agent: ["12_new.png", "3_e_trade.png", "10_e_trade.png"]
     }
