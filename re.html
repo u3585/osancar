@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동차 등록증 및 번호판 재발급 안내</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .tab-active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        .sub-tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-car text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-900">자동차 등록증 및 등록번호판 재발급 안내</h1>
+                </div>
+            </div>
+           
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- Intro Banner -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-8 text-white shadow-xl mb-8 relative overflow-hidden">
+            <div class="absolute right-0 bottom-0 opacity-10 translate-x-4 translate-y-4">
+                <i class="fa-solid fa-id-card text-9xl"></i>
+            </div>
+            <div class="relative z-10 max-w-2xl">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-3">자동차 등록증 및 등록번호판 재발급 안내</h2>
+                <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
+                    분실, 멸실, 훼손, 등록증 변경사항 기재란 부족 등의 이유로 자동차 등록증 재발급을 안내합니다.
+		<br>사고, 오염, 변색, 인식불가 등의 이유로 자동차 등록번호판 재발급을 안내합니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- Main Category Tabs (Registration vs License Plate) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <button onclick="switchCategory('cert')" id="btn-cert" class="p-5 rounded-xl border-2 transition-all flex items-center space-x-4 text-left tab-active shadow-sm group">
+                <div class="w-12 h-12 rounded-lg bg-blue-100 group-[.tab-active]:bg-white/20 flex items-center justify-center text-blue-600 group-[.tab-active]:text-white text-xl">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">자동차 등록증 재발급</h3>
+                    <p class="text-xs opacity-80 mt-0.5">분실 또는 훼손된 등록증 재발급 안내</p>
+                </div>
+            </button>
+            <button onclick="switchCategory('plate')" id="btn-plate" class="p-5 rounded-xl border-2 border-slate-200 bg-white transition-all flex items-center space-x-4 text-left shadow-sm group hover:border-blue-300">
+                <div class="w-12 h-12 rounded-lg bg-slate-100 group-[.tab-active]:bg-white/20 flex items-center justify-center text-slate-600 group-[.tab-active]:text-white text-xl">
+                    <i class="fa-solid fa-id-badge"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-slate-900 group-[.tab-active]:text-white">자동차 번호판 재발급</h3>
+                    <p class="text-xs text-slate-500 group-[.tab-active]:opacity-80 mt-0.5">사고, 훼손, 변색 등에 따른 번호판 교체</p>
+                </div>
+            </button>
+        </div>
+
+        <!-- Section: License Plate Reasons (Only shown for plate category) -->
+        <div id="plate-reasons-section" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8 hidden">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">자동차 번호판 재발급 신청 사유 안내</h3>
+            </div>
+            <p class="text-sm text-slate-600 mb-6">
+                번호판 재발급은 정당한 사유가 있어야 하며, 특히 사고나 자연 마모로 인해 식별이 불가능할 때 신청할 수 있습니다.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="text-amber-600 font-bold mb-1 flex items-center"><i class="fa-solid fa-car-burst mr-2"></i>사고로 인한 찌그러짐</div>
+                    <p class="text-xs text-slate-600 leading-relaxed">교통사고나 충격으로 인해 번호판이 물리적으로 파손되거나 형태가 심하게 변형된 경우</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="text-amber-600 font-bold mb-1 flex items-center"><i class="fa-solid fa-burst mr-2"></i>훼손 및 파손</div>
+                    <p class="text-xs text-slate-600 leading-relaxed">외부 충격이나 노후화로 인해 글자나 테두리가 깨지거나 떨어져 나간 경우</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="text-amber-600 font-bold mb-1 flex items-center"><i class="fa-solid fa-palette mr-2"></i>변색 및 식별 불능</div>
+                    <p class="text-xs text-slate-600 leading-relaxed">햇빛(자외선) 노출 등으로 글자나 배경 색상이 바래서 번호를 제대로 알아볼 수 없는 경우</p>
+                </div>
+            </div>
+            <div class="mt-4 p-3 bg-blue-50 rounded-lg text-xs text-blue-800 flex items-start space-x-2">
+                <i class="fa-solid fa-circle-info mt-0.5"></i>
+                <span><strong>참고:</strong> 번호판 훼손/분실 시 구 번호판인 경우 전국 번호판(필름식/페인트식) 체계로 교체될 수 있으며, 앞/뒤 중 훼손된 쪽만 혹은 전체를 교체할 수 있습니다. (기존 번호판 반납 필수)</span>
+            </div>
+        </div>
+
+        <!-- Visitor Type Interactive Selector -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">방문자 유형을 선택하세요</h3>
+            <p class="text-sm text-slate-500 mb-6">누가 방문하여 신청하는지에 따라 제출해야 하는 서류가 달라집니다.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onclick="setVisitor('owner')" id="visitor-owner" class="p-4 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-900 font-semibold text-sm transition-all text-center">
+                    <i class="fa-solid fa-user text-lg mb-1 block"></i>
+                    자동차 소유자 본인 방문
+                </button>
+                <button onclick="setVisitor('proxy')" id="visitor-proxy" class="p-4 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-medium text-sm transition-all text-center hover:border-slate-300">
+                    <i class="fa-solid fa-user-shield text-lg mb-1 block"></i>
+                    가족 / 대리인 방문
+                </button>
+                <button onclick="setVisitor('joint')" id="visitor-joint" class="p-4 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-medium text-sm transition-all text-center hover:border-slate-300">
+                    <i class="fa-solid fa-users text-lg mb-1 block"></i>
+                    공동명의 (미방문자 존재)
+                </button>
+            </div>
+        </div>
+
+        <!-- Requirements Result Card -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                <div>
+                    <span id="result-badge" class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">본인 방문</span>
+                    <h3 id="result-title" class="text-xl font-bold text-slate-900 mt-2">자동차 소유자 본인 신청 서류 안내</h3>
+                </div>
+                <div class="mt-2 sm:mt-0 text-xs text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg inline-flex items-center">
+                    <i class="fa-regular fa-clock mr-1"></i> 소요 시간: 당일 즉시 발급 (번호판은 번호판 제작소 소요)
+                </div>
+            </div>
+
+            <!-- Dynamic Requirement Items -->
+            <div id="requirements-container" class="space-y-4">
+                <!-- Dynamically filled by JS -->
+            </div>
+        </div>
+
+        <!-- Application Forms Section -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 mb-8">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">필수 작성 서식 및 미리보기</h3>
+            <p class="text-sm text-slate-500 mb-6">민원실 방문 시 작성해야 하는 서식 종류와 위임장 작성 시 주의사항입니다.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Form 1 -->
+                <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-bold text-slate-900 flex items-center">
+                            <i class="fa-solid fa-file-pen text-blue-600 mr-2"></i> 자동차 등록증 재발급
+                        </span>
+                        <span class="text-xs bg-blue-100 text-blue-800 font-medium px-2 py-0.5 rounded">신청서</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        자동차 등록증 분실·훼손 시 작성하는 서식으로, 소유자 인적사항 및 차량 정보를 기재합니다.
+                    </p>
+                    <button onclick="openFormModal('cert')" class="w-full py-2.5 px-4 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>신청서 서식 미리보기</span>
+                    </button>
+                </div>
+
+                <!-- Form 2 -->
+                <div class="border border-slate-200 rounded-xl p-5 bg-slate-50">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-bold text-slate-900 flex items-center">
+                            <i class="fa-solid fa-file-pen text-blue-600 mr-2"></i> 등록번호판재발급등 신청서
+                        </span>
+                        <span class="text-xs bg-indigo-100 text-indigo-800 font-medium px-2 py-0.5 rounded">신청서</span>
+                    </div>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        번호판 재발급/교체를 원할 때 작성하며, 훼손 또는 사고 사유를 체크하고 제출합니다.
+                    </p>
+                    <button onclick="openFormModal('plate')" class="w-full py-2.5 px-4 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>신청서 서식 미리보기</span>
+                    </button>
+                </div>
+
+                <!-- Form 3 (Delegation) -->
+                <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 md:col-span-2">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-bold text-slate-900 flex items-center">
+                            <i class="fa-solid fa-signature text-amber-600 mr-2"></i> 위임장 작성 안내 (대리인 방문 시 필수)
+                        </span>
+                        <span class="text-xs bg-amber-100 text-amber-800 font-medium px-2 py-0.5 rounded">대리인용</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-600">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <strong class="text-slate-900 block mb-1">1. 일반도장 날인</strong>
+                            위임장 서식 하단에는 반드시 <strong>소유자의 일반도장</strong>이 날인되어 있어야 합니다. (인감도장이 아니어도 일반도장 가능)
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <strong class="text-slate-900 block mb-1">2. 소유자 신분증 지참</strong>
+                            대리인 방문 시에도 <strong>자동차 소유자의 신분증(사본 가능 또는 원본)</strong>을 함께 지참해야 합니다.
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <strong class="text-slate-900 block mb-1">3. 대리인 본인 신분증</strong>
+                            방문하는 가족이나 대리인 역시 본인의 신분증을 지참하여 창구에 제시해야 합니다.
+                        </div>
+                    </div>
+                    <div class="mt-4 text-right">
+                        <button onclick="openFormModal('proxy')" class="py-2 px-4 bg-slate-800 text-white rounded-lg text-xs font-semibold hover:bg-slate-700 transition inline-flex items-center space-x-2">
+                            <i class="fa-solid fa-file-contract"></i>
+                            <span>위임장 서식 샘플 보기</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <p>본 안내 페이지는 대한민국 자동차관리법 및 지자체 민원실 기준에 작성되었습니다.</p>
+        <p class="mt-1">기관 방문 전 해당 시·군·구청 차량등록사업소에 사전 문의하시면 더욱 정확합니다.</p>
+    </footer>
+
+    <!-- Modal for Form Preview -->
+    <div id="form-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                <h4 id="modal-title" class="font-bold text-lg text-slate-900">서식 미리보기</h4>
+                <button onclick="closeFormModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="text-sm text-slate-700 space-y-4">
+                <!-- Dynamically loaded modal body -->
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-100 text-right">
+                <button onclick="closeFormModal()" class="px-4 py-2 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 transition">확인 완료</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let currentCategory = 'cert'; // 'cert' or 'plate'
+        let currentVisitor = 'owner'; // 'owner', 'proxy', 'joint'
+
+        const requirementsData = {
+            cert: {
+                owner: [
+                    { icon: 'fa-id-card', title: '자동차 소유자 본인 신분증', desc: '주민등록증, 운전면허증, 여권 중 1개' },
+                    { icon: 'fa-file-pen', title: '자동차 등록증 재발급 신청서', desc: '방문 시 차량등록사업소 민원실에 비치된 서식 작성' },
+                    { icon: 'fa-coins', title: '수수료', desc: '정부수입인지 발급 수수료 (약 700원 내외)' }
+                ],
+                proxy: [
+                    { icon: 'fa-user-shield', title: '방문한 대리인 신분증', desc: '주민등록증, 운전면허증 등 대리인 본인 확인용' },
+                    { icon: 'fa-id-card', title: '자동차 소유자 신분증', desc: '소유자 본인의 신분증 지참 (사본 또는 원본)' },
+                    { icon: 'fa-signature', title: '위임장 (일반도장 날인)', desc: '소유자의 일반도장이 반드시 날인된 위임장 작성 필수' },
+                    { icon: 'fa-file-pen', title: '자동차 등록증 재발급 신청서', desc: '대리인 작성 및 제출' }
+                ],
+                joint: [
+                    { icon: 'fa-user', title: '방문자 신분증', desc: '방문하는 공동명의자 본인 신분증' },
+                    { icon: 'fa-users', title: '미방문 공동명의자 신분증 사본', desc: '방문하지 않은 공동명의자의 신분증 사본 필요' },
+                    { icon: 'fa-signature', title: '미방문 공동명의자 도장', desc: '미방문자의 도장(일반도장)이 날인된 위임장 또는 동의서' },
+                    { icon: 'fa-file-pen', title: '재발급 신청서', desc: '신청서 작성 제출' }
+                ]
+            },
+            plate: {
+                owner: [
+                    { icon: 'fa-id-card', title: '자동차 소유자 본인 신분증', desc: '주민등록증, 운전면허증, 여권' },
+                    { icon: 'fa-file-pen', title: '등록번호판재발급등 신청서', desc: '민원실 비치 서식 작성' },
+                    { icon: 'fa-car-burst', title: '사유 소명 및 번호판 반납', desc: '사고/훼손/변색된 기존 번호판 반납 (앞/뒤 중 해당분)' },
+                    { icon: 'fa-money-bill', title: '번호판 제작 비용 및 수수료', desc: '번호판 제작소 비용 별도 소요' }
+                ],
+                proxy: [
+                    { icon: 'fa-user-shield', title: '방문한 대리인 신분증', desc: '대리인 본인 신분증 확인' },
+                    { icon: 'fa-id-card', title: '자동차 소유자 신분증', desc: '소유자의 신분증 지참' },
+                    { icon: 'fa-signature', title: '위임장 (소유자 일반도장 날인)', desc: '위임장에 소유자의 일반도장 필수 날인' },
+                    { icon: 'fa-car-burst', title: '기존 번호판 반납', desc: '찌그러지거나 훼손된 기존 번호판 지참 및 반납' }
+                ],
+                joint: [
+                    { icon: 'fa-user', title: '방문자 신분증', desc: '방문자 본인 신분증' },
+                    { icon: 'fa-users', title: '미방문 공동명의자 신분증 및 도장', desc: '미방문 공동명의자의 신분증과 도장(일반도장) 필요' },
+                    { icon: 'fa-signature', title: '위임장 작성', desc: '공동명의자 전원의 위임 또는 동의 사항 기재' },
+                    { icon: 'fa-car-burst', title: '기존 번호판 반납', desc: '손상된 번호판 반납' }
+                ]
+            }
+        };
+
+        function switchCategory(cat) {
+            currentCategory = cat;
+            const btnCert = document.getElementById('btn-cert');
+            const btnPlate = document.getElementById('btn-plate');
+            const plateReasons = document.getElementById('plate-reasons-section');
+
+            if (cat === 'cert') {
+                btnCert.className = "p-5 rounded-xl border-2 transition-all flex items-center space-x-4 text-left tab-active shadow-sm group";
+                btnPlate.className = "p-5 rounded-xl border-2 border-slate-200 bg-white transition-all flex items-center space-x-4 text-left shadow-sm group hover:border-blue-300";
+                plateReasons.classList.add('hidden');
+            } else {
+                btnPlate.className = "p-5 rounded-xl border-2 transition-all flex items-center space-x-4 text-left tab-active shadow-sm group";
+                btnCert.className = "p-5 rounded-xl border-2 border-slate-200 bg-white transition-all flex items-center space-x-4 text-left shadow-sm group hover:border-blue-300";
+                plateReasons.classList.remove('hidden');
+            }
+            updateRequirements();
+        }
+
+        function setVisitor(type) {
+            currentVisitor = type;
+            ['owner', 'proxy', 'joint'].forEach(t => {
+                const btn = document.getElementById(`visitor-${t}`);
+                if (t === type) {
+                    btn.className = "p-4 rounded-xl border-2 border-blue-600 bg-blue-50 text-blue-900 font-semibold text-sm transition-all text-center shadow-sm";
+                } else {
+                    btn.className = "p-4 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-medium text-sm transition-all text-center hover:border-slate-300";
+                }
+            });
+            updateRequirements();
+        }
+
+        function updateRequirements() {
+            const container = document.getElementById('requirements-container');
+            const badge = document.getElementById('result-badge');
+            const title = document.getElementById('result-title');
+
+            let badgeText = '';
+            let titleText = '';
+
+            if (currentVisitor === 'owner') {
+                badgeText = '본인 방문';
+                titleText = currentCategory === 'cert' ? '자동차 소유자 본인 등록증 재발급 서류' : '자동차 소유자 본인 번호판 재발급 서류';
+            } else if (currentVisitor === 'proxy') {
+                badgeText = '가족 / 대리인 방문';
+                titleText = currentCategory === 'cert' ? '대리인 방문 시 등록증 재발급 서류' : '대리인 방문 시 번호판 재발급 서류';
+            } else {
+                badgeText = '공동명의 (미방문자 존재)';
+                titleText = currentCategory === 'cert' ? '공동명의 미방문 시 등록증 재발급 서류' : '공동명의 미방문 시 번호판 재발급 서류';
+            }
+
+            badge.innerText = badgeText;
+            title.innerText = titleText;
+
+            const items = requirementsData[currentCategory][currentVisitor];
+            let html = '';
+            items.forEach(item => {
+                html += `
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid ${item.icon}"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">${item.title}</h4>
+                            <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function openFormModal(type) {
+            const modal = document.getElementById('form-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+
+            if (type === 'cert') {
+                modalTitle.innerText = "자동차 등록증 재발급 신청서 서식 요약";
+                modalContent.innerHTML = `
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+                        <p class="font-bold text-slate-900 text-sm">[자동차등록증 재발급 신청서 주요 항목]</p>
+                        <p>• <strong>자동차 등록번호:</strong> 재발급 대상 차량 번호</p>
+                        <p>• <strong>소유자 정보:</strong> 성명(법인명), 주민(법인)등록번호, 주소, 연락처</p>
+                        <p>• <strong>신청 사유:</strong> 분실, 훼손 등</p>
+                        <p class="text-blue-600 mt-2">※ 차량등록사업소 민원실 비치 서식으로 방문 즉시 작성 및 제출 가능합니다.</p>
+                    </div>
+                `;
+            } else if (type === 'plate') {
+                modalTitle.innerText = "등록번호판재발급등 신청서 서식 요약";
+                modalContent.innerHTML = `
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+                        <p class="font-bold text-slate-900 text-sm">[등록번호판재발급등 신청서 주요 항목]</p>
+                        <p>• <strong>차량 정보:</strong> 자동차 등록번호 및 차종</p>
+                        <p>• <strong>신청 구분:</strong> 번호판 재발급, 등록번호판 교체 등</p>
+                        <p>• <strong>재발급 사유:</strong> 사고로 인한 찌그러짐, 파손(훼손), 번호 변색 등 체크</p>
+                        <p>• <strong>번호판 반납 여부:</strong> 훼손된 기존 번호판 반납 확인란</p>
+                        <p class="text-blue-600 mt-2">※ 사고 훼손 시 사유를 명확히 기재하여 제출합니다.</p>
+                    </div>
+                `;
+            } else if (type === 'proxy') {
+                modalTitle.innerText = "위임장 작성 및 날인 안내";
+                modalContent.innerHTML = `
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200 space-y-3 text-xs text-amber-900">
+                        <p class="font-bold text-sm">[위임장 작성 필수 요건]</p>
+                        <p>1. <strong>위임인(소유자) 인적사항:</strong> 소유자 성명, 연락처, 주소 기재</p>
+                        <p>2. <strong>수임인(대리인) 인적사항:</strong> 방문하는 대리인 성명, 연락처, 소유자와의 관계 기재</p>
+                        <p>3. <strong>일반도장 날인:</strong> 위임장 하단에 <strong>소유자의 일반도장</strong>이 반드시 날인되어 있어야 유효합니다.</p>
+                        <p>4. <strong>첨부 서류:</strong> 소유자 신분증(사본/원본) 지참 필수</p>
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeFormModal() {
+            document.getElementById('form-modal').classList.add('hidden');
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            updateRequirements();
+        }
+    </script>
+</body>
+</html>
