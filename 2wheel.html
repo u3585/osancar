@@ -83,7 +83,7 @@ const imageMap = {
         // 1. 둘 다 방문
         both: ["14_trade.png", "3_e_trade.png"],
         // 2. 추가될 사람(B)만 방문 (A 미방문)
-        only_B: ["14_trade.png", "3_e_trade.png", "trade.png"],
+        only_B: ["14_trade.png", "3_e2_trade.png"],
         // 3. 원 소유자(A)만 방문 (B 미방문)
         only_A: ["14_trade.png", "3_e_trade.png", "9.jpg"],
         // 4. 대리인 방문 (둘 다 미방문)
@@ -136,8 +136,7 @@ function calculateDocs() {
             case "only_B":
                 docs = [
                     ...baseDocs,
-                    "B 신분증",
-                    "<span class='badge'>필수</span> A 자동차 매도용 인감증명서",
+                    "A 신분증", "B 신분증",
                     "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서"
                 ];
                 break;
