@@ -121,7 +121,7 @@ function calculateDocs() {
 
     if (type === "R1") {
         // [유형 1] 자동차 등록증 재발급
-        const baseDocs = ["5. 자동차 등록증 재발급신청서"];
+        const baseDocs = ["자동차 등록증 재발급신청서(5번 신청서) 작성"];
         
         switch (visitor) {
             case "owner":
@@ -129,15 +129,15 @@ function calculateDocs() {
                 break;
             case "agent":
                 docs = [...baseDocs, 
-                    "9. 위임장(자동차 소유자의 도장 필수)",
-                    "자동차 소유자의 신분증",
+                    "위임장(9번 신청서) 작성",
+                    "자동차 소유자 신분증",
                     "방문한 대리인 신분증"
                 ];
                 break;
         }
     } else if (type === "R2") {
         // [유형 2] 등록번호판재발급등 신청서
-        const baseDocs = ["6. 등록번호판재발급등 신청서"];
+        const baseDocs = ["등록번호판재발급등 신청서(6번 신청서) 작성"];
         
         switch (visitor) {
             
@@ -150,7 +150,7 @@ function calculateDocs() {
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "9. 위임장(자동차 소유자의 도장 필수)",
+                    "위임장(9번 신청서) 작성",
                     "자동차 소유자 신분증",
                     "방문한 대리인 신분증"
                 ];
