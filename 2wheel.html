@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>이륜자동차 명의변경 필요서류 안내</title>
+    <title>이륜자동차 명의변경 안내</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; padding: 20px; background-color: #f8f9fa; line-height: 1.5; }
         .container { max-width: 550px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
@@ -28,7 +28,7 @@
 <body>
 
 <div class="container">
-    <h2>🛵 이륜자동차 명의변경 서류 안내  🏍️</h2>
+    <h2>🛵 이륜자동차 명의변경 안내  🏍️</h2>
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
@@ -49,7 +49,7 @@
 
     <!-- 결과 출력 영역 -->
     <div class="result-card">
-        <h3>📄 준비해야 할 구비서류</h3>
+        <h3>📄 신청서 작성 및 준비물 안내</h3>
         <ul id="docList"></ul>
     </div>
 
@@ -127,7 +127,7 @@ function calculateDocs() {
 
     if (type === "A_to_B") {
         // [유형 1] 판매자(A) -> 구매자(B)
-        const baseDocs = ["이륜자동차 신고사항 변경신고서", "자동차 양도증명서"];
+        const baseDocs = ["이륜자동차 신고사항 변경신고서(14번 신청서)", "자동차 양도증명서(3번 신청서)"];
         
         switch (visitor) {
             case "both":
@@ -151,7 +151,7 @@ function calculateDocs() {
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "위임장",
+                    "위임장(9번 신청서)",
                     "A 신분증, 도장",
                     "B 신분증, 도장",
                     "대리인 신분증"
@@ -167,20 +167,19 @@ function calculateDocs() {
             case "only_N":
                 docs = [
                     ...baseDocs,
-                    "[준비서류] 이륜차 폐지증명서",
-                    "[준비서류] 판매자 신분증 사본",
-                    "[확인] 판매자 도장이 찍힌 자동차 양도증명서"
+                    "이륜차 폐지증명서",
+                    "판매자 신분증 사본",
+                    "[확인]양도인(판매자)의 도장이 찍힌 자동차양도증명서"
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "[준비서류] 이륜차 폐지증명서",
-                    "[준비서류] 판매자 신분증 사본",
-                    "[확인] 판매자 도장이 찍힌 자동차 양도증명서",
-                    "[준비서류]위임장",
+                    "이륜차 폐지증명서",
+                    "판매자 신분증 사본",
+                    "[확인]양도인(판매자)의 도장이 찍힌 자동차양도증명서",
+                    "위임장(9번 신청서)",
                     "구매자 신분증",
-                    "구매자 도장",
                     "대리인 신분증"
                 ];
                 break;
