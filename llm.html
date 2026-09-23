@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>음성 안내 도우미</title>
+</head>
+<body>
+
+    <h2>🚗 차량 민원 음성 안내 시스템</h2>
+    <button onclick="startListening()">🎤 음성으로 질문하기</button>
+    <p><strong>인식된 내용:</strong> <span id="transcript">버튼을 누르고 말씀하세요...</span></p>
+    
+    <hr>
+    
+    <h3>안내 결과:</h3>
+    <div id="guideResult" style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+        음성 인식을 통해 필요한 서류를 안내해 드립니다.
+    </div>
+
+    <script>
+        function startListening() {
+            // 브라우저 내장 음성 인식 객체 생성
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("이 브라우저는 음성 인식을 지원하지 않습니다. 크롬을 사용해 주세요.");
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ko-KR'; // 한국어 설정
+            recognition.start();
+
+            recognition.onstart = function() {
+                document.getElementById("transcript").innerText = "듣고 있는 중...";
+            };
+
+            // 음성이 텍스트로 변환되었을 때 실행
+            recognition.onresult = function(event) {
+                const userText = event.results[0][0].transcript;
+                document.getElementById("transcript").innerText = userText;
+                
+                // 텍스트 분석 및 맞춤 안내 출력
+                analyzeText(userText);
+            };
+
+            recognition.onerror = function(event) {
+                document.getElementById("transcript").innerText = "오류가 발생했습니다: " + event.error;
+            };
+        }
+
+        function analyzeText(text) {
+            const resultDiv = document.getElementById("guideResult");
+            
+            // 키워드 감지 로직 (예: '번호판'과 '대리인' 또는 '교체'가 포함된 경우)
+            if (text.includes("번호판") && (text.includes("대리인") || text.includes("교체") || text.includes("가족"))) {
+                resultDiv.innerHTML = `
+                    <h4>🔍 [대리인 번호판 교체 안내]</h4>
+                    <p>말씀하신 내용을 분석한 결과, <strong>대리인을 통한 번호판 교체</strong> 민원입니다.</p>
+                    <ul>
+                        <li><strong>준비물:</strong> 자동차 소유자 신분증, 대리인 신분증</li>
+                        <li><strong>서류:</strong> 위임장 (반드시 <strong>자동차 소유자의 도장</strong> 날인 필요)</li>
+                        <li><strong>신청서:</strong> 등록번호판등 재발급 신청서 작성 후 제출</li>
+                        <li><strong>기타:</strong> 찌그러진 기존 번호판 지참 필수</li>
+                    </ul>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <p>입력하신 내용: "<em>${text}</em>"</p>
+                    <p>죄송합니다. 정확한 민원 내용을 파악하지 못했습니다. "번호판 교체" 또는 "대리인" 등의 단어를 포함해서 다시 말씀해 주세요.</p>
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>
