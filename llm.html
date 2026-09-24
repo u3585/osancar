@@ -52,7 +52,7 @@
             const resultDiv = document.getElementById("guideResult");
             
             // 키워드 감지 로직 (예: '번호판'과 '대리인' 또는 '교체'가 포함된 경우)
-            if (text.includes("번호판") && (text.includes("대리인") || text.includes("교체") || text.includes("가족"))) {
+            if (text.includes("자동차 등록증") && (text.includes("대리인") || text.includes("재발급") || text.includes("분실"))) {
                 resultDiv.innerHTML = `'
                     <h4>🔍 [대리인 번호판 교체 안내]</h4>
                     <p>말씀하신 내용을 분석한 결과, <strong>대리인을 통한 번호판 교체</strong> 민원입니다.</p>
