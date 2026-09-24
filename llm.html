@@ -64,7 +64,7 @@
                     </ul>
                 `;
                 
-                if (text.includes("차량등록증") && (text.includes("재발급") || text.includes("등록증") || text.includes("분실"))) {
+                else if (text.includes("차량등록증") && (text.includes("재발급") || text.includes("등록증") || text.includes("분실"))) {
                     resultDiv.innerHTML = `
                     <h4> 자동차 등록증 재발급 </h4>
                     <p> 자동차 등록증을 재발급 하러 오셨군요</p>`;
