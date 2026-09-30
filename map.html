@@ -31,55 +31,10 @@ var infowindow = new naver.maps.InfoWindow({
     content: contentString
 });
 
-        // 2. 표시할 5개의 장소 데이터 (도로명 또는 지번 주소 입력)
-        var places = [
-            { title: '장소 1', address: '오산시 차량등록사업소' },
-            { title: '장소 2', address: '도장가게 1' },
-            { title: '장소 3', address: '도장가게 2' },
-            { title: '장소 4', address: '도장가게 3' },
-            { title: '장소 5', address: '프린터 1 (오산 청학도서관 1층)' },
-            { title: '장소 6', address: '프린터 2 (나단기획)' }
-        ];
-        naver.maps.Event.addListener(marker, "click", function(e) {
-    if (infowindow.getMap()) {
-        infowindow.close();
-    } else {
-        infowindow.open(map, marker);
-    }
-});
+       
 
-infowindow.open(map, marker);
 
-        // 3. 영역(Bounds) 객체 생성
-        var bounds = new naver.maps.LatLngBounds();
 
-        // 4. 주소를 좌표로 변환(Geocoding)하여 마커 생성 및 영역 확장
-        places.forEach(function(place) {
-            naver.maps.Service.geocode({
-                query: place.address
-            }, function(status, response) {
-                if (status === naver.maps.Service.Status.OK) {
-                    var result = response.v2;
-                    if (result.addresses.length > 0) {
-                        var item = result.addresses[0];
-                        var point = new naver.maps.LatLng(item.y, item.x);
-
-                        // 마커 생성
-                        var marker = new naver.maps.Marker({
-                            map: map,
-                            position: point,
-                            title: place.title
-                        });
-
-                        // bounds 객체에 좌표 추가
-                        bounds.extend(point);
-
-                        // 5. 모든 마커가 포함되도록 지도 범위 자동 조정
-                        map.fitBounds(bounds);
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>
