@@ -12,13 +12,14 @@
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=s48jyixhzc&submodules=geocoder"></script>
     <script>
         // 1. 기본 지도 생성
-        var map = new naver.maps.Map('map', {
-            center: new naver.maps.LatLng(37.1575680, 127.0650663), // 차량등록사업소
+        var Vehicle Registration Office = new naver.maps.LatLng(37.1575680, 127.0650663),
+            map = new naver.maps.Map('map', {
+            center: Vehicle Registration Office(0, 500)
             zoom: 17
-        });
+        }),
         marker = new naver.maps.Marker({
         map: map,
-        position: cityhall
+        position: Vehicle Registration Office
     });
 
 var contentString = [
@@ -26,6 +27,9 @@ var contentString = [
         '<h3>오산시 차량등록사업소</h3>',  
         '</div>'
     ].join('');
+var infowindow = new naver.maps.InfoWindow({
+    content: contentString
+});
 
         // 2. 표시할 5개의 장소 데이터 (도로명 또는 지번 주소 입력)
         var places = [
@@ -36,6 +40,15 @@ var contentString = [
             { title: '장소 5', address: '프린터 1 (오산 청학도서관 1층)' },
             { title: '장소 6', address: '프린터 2 (나단기획)' }
         ];
+        naver.maps.Event.addListener(marker, "click", function(e) {
+    if (infowindow.getMap()) {
+        infowindow.close();
+    } else {
+        infowindow.open(map, marker);
+    }
+});
+
+infowindow.open(map, marker);
 
         // 3. 영역(Bounds) 객체 생성
         var bounds = new naver.maps.LatLngBounds();
