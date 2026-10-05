@@ -61,15 +61,7 @@
       title: '차량등록사업소'
     });
     
-    // 도장가게 오버레이
-    var labelOverlay = new naver.maps.CustomControl({
-      position: naver.maps.Position.TOP_LEFT
-    });
-
-    labelOverlay.setContent('<div style="background:white;padding:6px;border:1px solid #ccc;">도장가게 위치</div>');
-    labelOverlay.setMap(map);
-
-    // 도장 가게 데이터 (예시)
+    // 도장 가게 위치 데이터
     var sealStores = [
       {
         name: '만물열쇠',
@@ -99,7 +91,7 @@
 
      
 
-    // 프린트 가게 데이터 (예시)
+    // 프린트 가게 위치 데이터
     var printStores = [
       {
         name: '나단기획',
@@ -172,6 +164,14 @@
     document.getElementById('btnPrint').addEventListener('click', function() {
       showStores(printStores);
     });
+
+     // 도장가게 오버레이
+    var labelOverlay = new naver.maps.CustomControl({
+      position: naver.maps.Position.TOP_LEFT
+    });
+
+    labelOverlay.setContent('<div style="background:white;padding:6px;border:1px solid #ccc;">도장가게 위치</div>');
+    labelOverlay.setMap(map);
   </script>
 </body>
 </html>
