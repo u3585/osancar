@@ -135,8 +135,18 @@
           title: store.name
         });
 
-        // 정보창 내용
         var contentString = `
+  <div style="padding:8px;">
+    <a href="https://map.naver.com/v5/search/${store.name}"
+       target="_blank"
+       style="font-weight:bold; font-size:16px; color:#0066ff; text-decoration:none;">
+       ${store.name}
+    </a><br>
+    전화번호: ${store.phone}
+  </div>
+`;
+        // 정보창 내용
+        // var contentString = `
           <div style="padding:8px;">
             <strong>${store.name}</strong><br>
             전화번호: ${store.phone}<br><br>
@@ -146,7 +156,7 @@
        네이버 지도에서 보기
     </a>
           </div>
-        `;
+        `; //
 
         var infoWindow = new naver.maps.InfoWindow({
           content: contentString
