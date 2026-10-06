@@ -25,7 +25,7 @@ h1 {
 /* 지도 영역 */
 #map {
   width: 100%;
-  height: 70vh; /* 모바일에서 크게 보이도록 */
+  height: 65vh; /* 모바일에서 크게 보이도록 */
   max-height: 600px; /* PC에서는 너무 커지지 않도록 제한 */
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -69,7 +69,7 @@ h1 {
   }
 
   #map {
-    height: 70vh; /* 모바일에서는 더 크게 */
+    height: 65vh; /* 모바일에서는 더 크게 */
   }
 
   .buttons button {
@@ -106,7 +106,7 @@ h1 {
     // 지도 생성
     var map = new naver.maps.Map('map', {
       center: new naver.maps.LatLng(carOfficeLat + 0.0005, carOfficeLng),
-      zoom: 18
+      zoom: 17
     });
 
     // 차량등록사업소 마커
