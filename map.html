@@ -167,4 +167,16 @@
     });
   }
 
-  document
+  document.getElementById('btnSeal').addEventListener('click', function () {
+    document.getElementById('statusText').innerText = "도장가게 위치";
+    showStores(sealStores);
+  });
+
+  document.getElementById('btnPrint').addEventListener('click', function () {
+    document.getElementById('statusText').innerText = "프린트 가능한 장소";
+    showStores(printStores);
+  });
+</script>
+
+</body>
+</html>
