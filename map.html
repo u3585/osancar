@@ -1,41 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <title>차량등록사업소 주변 지도</title>
+<meta charset="UTF-8">
+<title>차량등록사업소 주변 지도</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    margin: 15px 0;
+    padding: 0 10px;
+  }
+
+  #statusText {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+  }
+
+  #map {
+    width: 100%;
+    height: 60vh;
+    max-height: 600px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .buttons {
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  .buttons button {
+    padding: 12px 20px;
+    font-size: 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+
+  .buttons button:hover {
+    background: #0056c7;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    #map {
+      height: 60vh;
+    }
+
+    .buttons button {
+      width: 80%;
+      font-size: 18px;
+      padding: 14px;
+    }
+
+    #statusText {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script type="text/javascript"
+  src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID">
+</script>
+
 </head>
 <body>
-    <!-- 지도가 표시될 영역 -->
-    <div id="map" style="width:100%;height:500px;"></div>
 
-    <!-- 네이버 지도 API 로드 (Client ID와 geocoder 서브모듈 필수) -->
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=s48jyixhzc"></script>
-    
-    <script>
-        // 1. 기본 지도 생성
-        var Vehicle Registration Office = new naver.maps.LatLng(37.1575680, 127.0650663),
-            map = new naver.maps.Map('map', {
-            center: Vehicle Registration Office(0, 500)
-            zoom: 17
-        }),
-        marker = new naver.maps.Marker({
-        map: map,
-        position: Vehicle Registration Office
+<h1>차량등록사업소 주변 지도</h1>
+<div id="statusText"></div>
+<div id="map"></div>
+
+<div class="buttons">
+  <button id="btnSeal">도장가게</button>
+  <button id="btnPrint">출력소(프린트)</button>
+</div>
+
+<script>
+  // 차량등록사업소 좌표
+  var carOfficeLat = 37.1575680;
+  var carOfficeLng = 127.0650663;
+
+  // 지도 생성 (중심을 약간 아래로 이동)
+  var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(carOfficeLat + 0.0005, carOfficeLng),
+    zoom: 17
+  });
+
+  // 차량등록사업소 마커
+  new naver.maps.Marker({
+    position: new naver.maps.LatLng(carOfficeLat, carOfficeLng),
+    map: map,
+    title: '차량등록사업소'
+  });
+
+  // 도장 가게 데이터
+  var sealStores = [
+    { name: '만물열쇠', phone: '031-377-1314', lat: 37.1581450, lng: 127.0647512 },
+    { name: '도어마스터 친절열쇠', phone: '031-377-1345', lat: 37.1588136, lng: 127.0647336 },
+    { name: 'OK열쇠', phone: '031-373-0070', lat: 37.1581854, lng: 127.0630929 },
+    { name: '땅콩열쇠', phone: '031-372-6494', lat: 37.1578502, lng: 127.0671861 }
+    ];
+ 
+  // 프린트 가게 데이터
+  var printStores = [
+      { name: '나단기획', phone: '031-372-9897', lat: 37.1590842, lng: 127.0646862 },
+      { name: '청학도서관', phone: '031-8036-6490', lat: 37.1562238, lng: 127.0654768 },
+      { name: '대학복사', phone: '031-372-3109', lat: 37.1530751, lng: 127.0629369 }
+    ];
+
+  var currentMarkers = [];
+  var currentInfoWindows = [];
+
+  function clearMarkers() {
+    currentMarkers.forEach(m => m.setMap(null));
+    currentMarkers = [];
+
+    currentInfoWindows.forEach(iw => iw.close());
+    currentInfoWindows = [];
+  }
+
+  function showStores(storeList) {
+    clearMarkers();
+
+    storeList.forEach(store => {
+      var marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(store.lat, store.lng),
+        map: map
+      });
+
+      var contentString = `
+        <div style="padding:8px;">
+          <a href="https://map.naver.com/v5/search/오산%20${store.name}"
+             target="_blank"
+             style="font-weight:bold; font-size:16px; color:#0066ff; text-decoration:none;">
+             ${store.name}
+          </a><br>
+          전화번호: <a href="tel:${store.phone}" style="color:#333;">${store.phone}</a>
+        </div>
+      `;
+
+      var infoWindow = new naver.maps.InfoWindow({ content: contentString });
+
+      naver.maps.Event.addListener(marker, 'click', function () {
+        infoWindow.open(map, marker);
+      });
+
+      currentMarkers.push(marker);
+      currentInfoWindows.push(infoWindow);
     });
+  }
 
-var contentString = [
-        '<div class="iw_inner">',
-        '<h3>오산시 차량등록사업소</h3>',  
-        '</div>'
-    ].join('');
-var infowindow = new naver.maps.InfoWindow({
-    content: contentString
-});
-
-       
-
-
-
-    </script>
-</body>
-</html>
+  document
