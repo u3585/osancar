@@ -82,7 +82,7 @@
 
 <body>
 
-<header>자동차 명의이전 준비서류 안내</header>
+<header>자동차 명의이전 준비서류 및 신청서 안내</header>
 
 <div class="container">
 
@@ -108,7 +108,7 @@
     </div>
 
     <div class="card">
-      <h3>2. 방문자 선택</h3>
+      <h3>2. 차량등록사업소 방문자 선택</h3>
 
       <label><input type="checkbox" id="sellerVisit"> 양도인 방문</label>
       <label><input type="checkbox" id="buyerVisit"> 양수인 방문</label>
@@ -118,7 +118,7 @@
       <button onclick="showResult()" style="
         width:100%; padding:14px; font-size:18px; 
         background:#2b7cff; color:white; border:none; border-radius:8px;">
-        필요한 서류 확인
+        신청서 작성 및 필수 준비물 안내
       </button>
     </div>
 
@@ -146,19 +146,36 @@ function showResult() {
   // 개인 ↔ 개인
   if (seller === "personal" && buyer === "personal") {
     if (sellerVisit && buyerVisit) {
-      html += "<li>양도인·양수인 신분증</li>";
-      html += "<li>이전등록 신청서</li>";
-      html += "<li>자동차양도증명서(직접 거래용)</li>";
+      html += "<li>[필수] 양수인 보험가입 완료</li>";
+      html += "<li>이전등록신청서 작성</li>";
+      html += "<li>자동차양도증명서 작성</li>";
+      html += "<li>[필수]양수인 양도인 신분증 지참</li>";
     } else if (!sellerVisit && buyerVisit) {
-      html += "<li>자동차 매도용 인감증명서(양수인 정보 기재)</li>";
-      html += "<li>양도인 도장</li>";
-      html += "<li>양수인 신분증</li>";
+      html += "<li>[필수] 양수인 보험가입 완료</li>";
+      html += "<li>이전등록신청서 작성</li>";
+      html += "<li>자동차양도증명서 작성</li>";
+      html += "<li>[필수]자동차 매도용 인감증명서(양수인 정보 기재)</li>";
+      html += "<li>[필수]양도인 도장(자동차양도증명서에 인장)</li>";
+      html += "<li>[필수]양수인 신분증</li>";
     } else if (sellerVisit && !buyerVisit) {
-      html += "<li>양수인 신분증 실물</li>";
+      html += "<li>[필수] 양수인 보험가입 완료</li>";
+      html += "<li>이전등록신청서 작성</li>";
+      html += "<li>자동차양도증명서 작성</li>";
       html += "<li>양수인 도장</li>";
-      html += "<li>위임장</li>";
+      html += "<li>위임장(양수인 도장 확인)</li>";
+      html += "<li>양도인 신분증</li>";
+      html += "<li>양수인 신분증</li>";
+    } else if (!sellerVisit && !buyerVisit) {
+      html += "<li>[필수] 양수인 보험가입 완료</li>";
+      html += "<li>이전등록신청서 작성</li>";
+      html += "<li>자동차양도증명서 작성</li>";
+      html += "<li>[필수]자동차 매도용 인감증명서(양수인 정보 기재)</li>";
+      html += "<li>[필수]양도인 도장(자동차양도증명서에 인장)</li>";
+      html += "<li>양수인 도장</li>";
+      html += "<li>위임장(양수인 도장 확인)</li>";
+      html += "<li>양수인 신분증</li>";
       html += "<li>대리인 신분증</li>";
-    }
+  }
   }
 
   // 개인 ↔ 법인
