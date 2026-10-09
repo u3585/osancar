@@ -147,9 +147,9 @@ function showResult() {
   if (seller === "personal" && buyer === "personal") {
     if (sellerVisit && buyerVisit) {
       html += "<li>[필수] 양수인 보험가입 완료</li>";
-      html += "<li>[필수 준비물] 양수인, 양도인 신분증</li>";
-      html += "* 신분증(주민등록증, 운전면허증, 여권, 외국인은 외국인등록증만 가능";
-      html += "[차량등록사업소 민원작성대에서 신청서 작성]";
+      html += "<li>[필수 준비물] 양수인, 양도인 신분증*</li>";
+      html += "* 신분증(주민등록증, 운전면허증, 여권, 외국인은 외국인등록증만 가능)";
+      html += "<br>[차량등록사업소 민원작성대에서 신청서 작성]</br>";
       html += "<li>이전등록신청서 작성(차량등록사업소 민원대) 2번 신청서</li>";
       html += "<li>자동차양도증명서 작성(차량등록사업소 민원대) 3번 신청서</li>"
     } else if (!sellerVisit && buyerVisit) {
