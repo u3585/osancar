@@ -110,8 +110,8 @@
     <div class="card">
       <h3>2. 차량등록사업소 미방문자 선택</h3>
 
-      <label><input type="checkbox" id="!sellerVisit"> 양도인(판매자) 미방문</label>
-      <label><input type="checkbox" id="!buyerVisit"> 양수인(구매자) 미방문</label>
+      <label><input type="checkbox" id="sellerVisit"> 양도인(판매자) 방문</label>
+      <label><input type="checkbox" id="buyerVisit"> 양수인(구매자) 방문</label>
     </div>
 
     <div class="card">
@@ -147,9 +147,9 @@ function showResult() {
   if (seller === "personal" && buyer === "personal") {
     if (sellerVisit && buyerVisit) {
       html += "<li>[필수] 양수인 보험가입 완료</li>";
-      html += "<li>이전등록신청서 작성</li>";
-      html += "<li>자동차양도증명서 작성</li>";
-      html += "<li>[필수]양수인 양도인 신분증 지참</li>";
+      html += "<li>[필수] 양수인, 양도인 신분증 지참</li>";
+      html += "<li>이전등록신청서 작성(차량등록사업소 민원대) 2번 신청서</li>";
+      html += "<li>자동차양도증명서 작성(차량등록사업소 민원대) 3번 신청서</li>"
     } else if (!sellerVisit && buyerVisit) {
       html += "<li>[필수] 양수인 보험가입 완료</li>";
       html += "<li>이전등록신청서 작성</li>";
