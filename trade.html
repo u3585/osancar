@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자동차 명의이전 안내</title>
+
+<style>
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f2f4f7;
+  }
+
+  header {
+    background: #2b7cff;
+    color: white;
+    padding: 16px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  @media(min-width: 900px) {
+    .container {
+      flex-direction: row;
+      gap: 20px;
+    }
+    .left, .right {
+      width: 50%;
+    }
+  }
+
+  .card {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  label {
+    display: block;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+
+  select, input[type="checkbox"] {
+    margin-top: 6px;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .result-card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .result-card ul {
+    padding-left: 20px;
+  }
+
+  .highlight {
+    font-weight: bold;
+    color: #2b7cff;
+  }
+</style>
+</head>
+
+<body>
+
+<header>자동차 명의이전 준비서류 안내</header>
+
+<div class="container">
+
+  <!-- LEFT SIDE -->
+  <div class="left">
+
+    <div class="card">
+      <h3>1. 거래 유형 선택</h3>
+
+      <label>양도인(판매자):
+        <select id="seller">
+          <option value="personal">개인</option>
+          <option value="corporate">법인</option>
+        </select>
+      </label>
+
+      <label>양수인(구매자):
+        <select id="buyer">
+          <option value="personal">개인</option>
+          <option value="corporate">법인</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="card">
+      <h3>2. 방문자 선택</h3>
+
+      <label><input type="checkbox" id="sellerVisit"> 양도인 방문</label>
+      <label><input type="checkbox" id="buyerVisit"> 양수인 방문</label>
+    </div>
+
+    <div class="card">
+      <button onclick="showResult()" style="
+        width:100%; padding:14px; font-size:18px; 
+        background:#2b7cff; color:white; border:none; border-radius:8px;">
+        필요한 서류 확인
+      </button>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="right">
+    <div id="result" class="result-card">
+      <h3>필요 서류 안내</h3>
+      <p>왼쪽에서 조건을 선택하면 필요한 서류가 여기에 표시됩니다.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showResult() {
+  const seller = document.getElementById('seller').value;
+  const buyer = document.getElementById('buyer').value;
+  const sellerVisit = document.getElementById('sellerVisit').checked;
+  const buyerVisit = document.getElementById('buyerVisit').checked;
+
+  let html = "<h3>필요 서류 안내</h3><ul>";
+
+  // 개인 ↔ 개인
+  if (seller === "personal" && buyer === "personal") {
+    if (sellerVisit && buyerVisit) {
+      html += "<li>양도인·양수인 신분증</li>";
+      html += "<li>이전등록 신청서</li>";
+      html += "<li>자동차양도증명서(직접 거래용)</li>";
+    } else if (!sellerVisit && buyerVisit) {
+      html += "<li>자동차 매도용 인감증명서(양수인 정보 기재)</li>";
+      html += "<li>양도인 도장</li>";
+      html += "<li>양수인 신분증</li>";
+    } else if (sellerVisit && !buyerVisit) {
+      html += "<li>양수인 신분증 실물</li>";
+      html += "<li>양수인 도장</li>";
+      html += "<li>위임장</li>";
+      html += "<li>대리인 신분증</li>";
+    }
+  }
+
+  // 개인 ↔ 법인
+  if (seller === "personal" && buyer === "corporate") {
+    html += "<li>법인인감증명서</li>";
+    html += "<li>법인등기부등본(말소사항 포함)</li>";
+    html += "<li>사업자등록증 사본</li>";
+    html += "<li>법인인감도장</li>";
+
+    if (!sellerVisit) {
+      html += "<li>자동차 매도용 인감증명서(양수인 정보 기재)</li>";
+      html += "<li>양도인 도장</li>";
+    }
+    if (!buyerVisit) {
+      html += "<li>법인인감 날인 위임장</li>";
+      html += "<li>대리인 신분증</li>";
+    }
+  }
+
+  // 법인 ↔ 개인
+  if (seller === "corporate" && buyer === "personal") {
+    html += "<li>자동차 매도용 법인인감증명서(양수인 정보 기재)</li>";
+    html += "<li>법인등기부등본(말소사항 포함)</li>";
+    html += "<li>사업자등록증 사본</li>";
+    html += "<li>법인인감도장</li>";
+    html += "<li>자동차등록증</li>";
+
+    if (!sellerVisit) {
+      html += "<li>법인인감 날인 위임장</li>";
+      html += "<li>대리인 신분증</li>";
+    }
+    if (!buyerVisit) {
+      html += "<li>양수인 신분증 실물</li>";
+      html += "<li>양수인 도장</li>";
+      html += "<li>위임장</li>";
+      html += "<li>대리인 신분증</li>";
+    }
+  }
+
+  // 법인 ↔ 법인
+  if (seller === "corporate" && buyer === "corporate") {
+    html += "<li>양도·양수 법인 모두:</li>";
+    html += "<ul>";
+    html += "<li>법인인감증명서</li>";
+    html += "<li>법인등기부등본(말소사항 포함)</li>";
+    html += "<li>사업자등록증 사본</li>";
+    html += "<li>법인인감도장</li>";
+    html += "</ul>";
+
+    if (!sellerVisit) {
+      html += "<li>양도 법인 위임장 + 대리인 신분증</li>";
+    }
+    if (!buyerVisit) {
+      html += "<li>양수 법인 위임장 + 대리인 신분증</li>";
+    }
+  }
+
+  html += "</ul>";
+
+  document.getElementById('result').innerHTML = html;
+}
+</script>
+
+</body>
+</html>
