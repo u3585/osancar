@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이륜자동차 명의변경 안내</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; padding: 20px; background-color: #f8f9fa; line-height: 1.5; }
@@ -10,6 +11,20 @@
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
         select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; }
+
+            /* 이륜차 보험 가입 강조 배너 스타일 */
+        .notice-banner {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-left: 4px solid #d9534f;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
         
         /* 필요서류 결과 카드 */
         .result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 25px; }
@@ -29,6 +44,9 @@
 
 <div class="container">
     <h2>🛵 이륜자동차 명의변경 안내  🏍️</h2>
+    <div class="notice-banner">
+        ⚠️ [보험 가입 후 이륜차 이전등록 가능]
+    </div>
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
