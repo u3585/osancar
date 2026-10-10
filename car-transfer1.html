@@ -45,6 +45,7 @@
         ul { margin: 8px 0 0 0; padding-left: 20px; }
         li { margin-bottom: 6px; font-size: 0.95rem; }
         .highlight { color: #d9534f; font-weight: bold; }
+        .highlight1 { color: #2525ff; font-weight: bold; }
         
         /* 서식 예시 이미지 섹션 스타일 */
         .image-section { margin-top: 35px; border-top: 2px dashed #ddd; padding-top: 20px; }
@@ -59,6 +60,7 @@
 <div class="card">
     <h2>🚗 자동차 이전등록(매매, 양도) 안내</h2>
     <p>방문하지 못하는 사람을 체크해 주세요.</p>
+    <p><span class='highlight'>[필수확인]</span> 양수인(구매자) 보험 가입 필수</p>
     
     <div class="option-group">
         <label><input type="checkbox" id="sellerAbsence" onchange="checkDocuments()"> 🔴 양도인(구 소유자, 판매자) 미방문</label>
@@ -137,12 +139,12 @@ function checkDocuments() {
     } else {
         // 1. 둘 다 방문 (기본)
         docs = [
-            "< 양도인, 양수인 모두 방문 >",
+            "< 양도인, 양수인 모두 방문했을 경우 >",
             "이전등록 신청서 작성",
             "자동차양도증명서(양도인, 양수인 직접거래용) 작성",
-            "[필수 준비물]양도인(판매자) 신분증",
-            "[필수 준비물]양수인(구매자) 신분증",
-            "<span class='highlight'>[확인]</span>양수인(구매자) 보험 가입 필수"
+            "<span class='highlight1'>[필수]</span> 양도인(판매자) 신분증",
+            "<span class='highlight1'>[필수]</span> 양수인(구매자) 신분증",
+            "<span class='highlight'>[확인]</span> 양수인(구매자) 보험 가입 필수"
         ];
         images = [
             { src: "2_trade.png", title: "이전등록 신청서" },
