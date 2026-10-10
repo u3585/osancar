@@ -119,13 +119,13 @@ function checkDocuments() {
     if (isSellerAbsent && isBuyerAbsent) {
         conditionText = "📌 양도인, 양수인 모두 대리인이 방문한 경우";
         docs = [
-            "이전등록 신청서(2번 신청서)",
-            "자동차양도증명서(양도인, 양수인 직접거래용)(3번 신청서)",
-            "<span class='highlight'>[필수]</span> 양수인(구매자)의 정보가 입력된 자동차 매도용 인감증명서",
-            "<span class='highlight'>[필수]</span> 자동차양도증명서에 양도인/양수인 도장 각각 필수",
-            "<span class='highlight'>[필수]</span> 양수인 도장이 찍힌 위임장",
-            "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
-            "<span class='highlight'>[필수]</span> 양도인 신분증",
+            "이전등록 신청서 작성",
+            "자동차양도증명서(양도인, 양수인 직접거래용) 작성",
+            "<span class='highlight'>[필수]</span> 자동차 매도용 인감증명서(양도인)",
+            "<span class='highlight'>[필수]</span> 자동차양도증명서에 양도인 도장 필수",
+            "<span class='highlight'>[필수]</span> 양수인(구매자) 도장이 찍힌 위임장",
+            "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증",
+            "<span class='highlight'>[필수]</span> 대리인 신분증",
         ];
         images = [
             { src: "2_trade.png", title: "이전등록 신청서 (대리인 접수용)" },
@@ -138,14 +138,14 @@ function checkDocuments() {
         docs = [
             "이전등록 신청서 작성",
             "자동차양도증명서(양도인, 양수인 직접거래용) 작성",
-            "<span class='highlight'>[필수]</span> 자동차 매도용 인감증명서",
+            "<span class='highlight'>[필수]</span> 자동차 매도용 인감증명서(양도인)",
             "<span class='highlight'>[필수]</span> 자동차양도증명서에 양도인 도장 필수",
             "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증"
         ];
         images = [
-            { src: "2_trade.png", title: "이전등록 신청서 (양도인 미방문용)" },
-            { src: "3_2_trade.png", title: "자동차양도증명서 (양도인 미방문용)" },
-            { src: "add_trade.png", title: "추가 구비 서류" }
+            { src: "2_trade.png", title: "이전등록 신청서 (양수인(구매자)만 방문한 경우)" },
+            { src: "3_2_trade.png", title: "자동차양도증명서 (양수인(구매자)만 방문한 경우)" },
+            { src: "add_trade.png", title: "자동차 양수자(구매자)의 정보가 기재된 자동차 매도용 인감증명서" }
         ];
     } else if (isBuyerAbsent) {
         conditionText = "📌 양도인(판매자)만 방문한 경우";
@@ -157,9 +157,9 @@ function checkDocuments() {
             "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증"
         ];
         images = [
-            { src: "2_trade.png", title: "이전등록 신청서 (양수인 미방문용)" },
-            { src: "3_trade.png", title: "자동차양도증명서 (양수인 미방문용)" },
-            { src: "10_trade.png", title: "위임장 서식" }
+            { src: "2_trade.png", title: "이전등록 신청서 (양도인(판매자)만 방문한 경우)" },
+            { src: "3_trade.png", title: "자동차양도증명서 (양도인(판매자)만 방문한 경우)" },
+            { src: "10_trade.png", title: "위임장 서식 (양수인이 양도인에게 위임하는 경우)" }
         ];
     } else {
         // 체크 박스가 둘 다 해제되었을 때 (기본 상태)
@@ -171,8 +171,8 @@ function checkDocuments() {
             "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증"
         ];
         images = [
-            { src: "2_trade.png", title: "이전등록 신청서" },
-            { src: "3_trade.png", title: "자동차양도증명서" }
+            { src: "2_trade.png", title: "이전등록 신청서(김차량이 강화물에게 자동차 이전등록)" },
+            { src: "3_trade.png", title: "자동차양도증명서(김차량이 강화물에게 자동차 이전등록)" }
         ];
     }
 
