@@ -81,7 +81,7 @@
     <h2>🚗 자동차 이전등록(매매, 양도) 안내</h2>
     
     <div class="notice-banner">
-        ⚠️ [양수인 보험 가입 후 자동차 이전등록 가능]
+        ⚠️ [양수인(구매자) 보험 가입 후 자동차 이전등록 가능]
     </div>
 
     <p>방문하지 못하는 사람을 체크해 주세요.</p>
@@ -138,9 +138,11 @@ function checkDocuments() {
         docs = [
             "이전등록 신청서 작성",
             "자동차양도증명서(양도인, 양수인 직접거래용) 작성",
-            "<span class='highlight'>[필수]</span> 자동차 매도용 인감증명서(양도인)",
-            "<span class='highlight'>[필수]</span> 자동차양도증명서에 양도인 도장 필수",
-            "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증"
+            "<span class='highlight'>[필수선택1]</span> 자동차 매도용 인감증명서(양도인)",
+            "<span class='highlight'>[필수선택1]</span> 자동차양도증명서에 양도인 도장 필수",
+            "<span class='highlight'>[필수선택2]</span> 자동차 매도용 본인서명사실확인서(양도인)",
+            "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증",
+            "*[필수선택1] 또는 [필수선택2] 중 하나는 반드시 준비해야함."
         ];
         images = [
             { src: "2_trade.png", title: "이전등록 신청서 (양수인(구매자)만 방문한 경우)" },
