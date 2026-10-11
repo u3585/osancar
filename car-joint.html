@@ -2,55 +2,56 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>자동차 공동명의 관련 신청서 안내</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동차 공동명의 신청서 작성 안내</title>
     <style>
-   body { 
-    font-family: 'Pretendard', 'Segoe UI', sans-serif; 
-    margin: 0; 
-    padding: 0; 
-    background-color: #f8f9fa; 
-    line-height: 1.5; 
-}
-.card { 
-    background: white; 
-    padding: 20px 15px; 
-    border-radius: 0; 
-    width: 100%; 
-    box-sizing: border-box; 
-    box-shadow: none; 
-    margin: 0 auto; 
-    min-height: 100vh;
-}
+        body { 
+            font-family: 'Pretendard', 'Segoe UI', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f7f6; 
+        }
+        .card { 
+            background: white; 
+            padding: 20px 15px; 
+            border-radius: 0; 
+            width: 100%; 
+            box-sizing: border-box; 
+            box-shadow: none; 
+            margin: 0 auto; 
+            min-height: 100vh;
+        }
+        
+        @media (min-width: 600px) {
+            body {
+                padding: 30px;
+            }
+            .card {
+                max-width: 600px;
+                border-radius: 12px;
+                padding: 25px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                min-height: auto;
+            }
+        }
 
-@media (min-width: 600px) {
-    body {
-        padding: 30px;
-    }
-    .card {
-        max-width: 600px;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        min-height: auto;
-    }
-}
+        h2 { margin-top: 0; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; font-size: 1.4rem; }
+        .form-group { margin: 20px 0; display: flex; flex-direction: column; gap: 8px; }
+        label { font-size: 15px; cursor: pointer; display: block; font-weight: bold; color: #333; margin-bottom: 4px; }
+        select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; box-sizing: border-box; }
+        
+        /* 필요서류 결과 카드 */
+        .result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 25px; }
+        .result-card h3 { margin-top: 0; color: #1c7ed6; font-size: 16px; margin-bottom: 10px; }
+        ul { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; font-size: 14.5px; }
+        .badge { background: #e63946; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; margin-right: 4px; }
 
-h2 { margin-top: 0; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; font-size: 1.4rem; }
-.form-group { margin-bottom: 20px 0; display: flex; flex-direction: column; gap: 12px; }
-label { font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 15px; }
-
-/* 필요서류 결과 카드 및 이미지 관련 기존 스타일 유지 */
-.result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 25px; }
-.result-card h3 { margin-top: 0; color: #1c7ed6; font-size: 16px; margin-bottom: 10px; }
-ul { margin: 0; padding-left: 20px; }
-li { margin-bottom: 8px; font-size: 14.5px; }
-.badge { background: #e63946; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; margin-right: 4px; }
-
-.image-card { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
-.image-card h3 { color: #333; font-size: 16px; margin-bottom: 15px; text-align: left; }
-.image-list { display: flex; flex-direction: column; gap: 15px; text-align: center; }
-.preview-image { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        /* 신청서 예시 이미지 영역 */
+        .image-card { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
+        .image-card h3 { color: #333; font-size: 16px; margin-bottom: 15px; text-align: left; }
+        .image-list { display: flex; flex-direction: column; gap: 15px; text-align: center; }
+        .preview-image { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
@@ -110,17 +111,12 @@ const visitorOptions = {
 // [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
 const imageMap = {
     A_to_AB: {
-        // 1. 둘 다 방문
         both: ["2_a_ab.png", "3_a_ab-1.png", "10_a_ab.png"],
-        // 2. 추가될 사람(B)만 방문 (A 미방문)
         only_B: ["2_a_ab.png", "3_a_ab-2.png", "10_a_ab.png", "add_s1.png"],
-        // 3. 원 소유자(A)만 방문 (B 미방문)
         only_A: ["2_a_ab.png", "3_a_ab-3.png", "10_a_ab.png", "9.jpg"],
-        // 4. 대리인 방문 (둘 다 미방문)
         agent: ["2_a_ab.png", "3_a_ab-4.png", "10_a_ab.png", "9.jpg","add_s1.png"]
     },
     AB_to_A: {
-        // 공동명의 -> 단독명의 기본 이미지 (방문자별 필요에 따라 추가 확장 가능)
         both: ["2_ab_a.png", "3_ab_a.png"],
         only_A: ["2_ab_a.png", "3-ab-a-1.png", "add-s2.png"],
         only_B: ["2_ab_a.png", "3_ab_a.png", "9-ab-a.png"],
@@ -128,12 +124,10 @@ const imageMap = {
     }
 };
 
-// 1단계 선택에 따라 2단계 드롭다운 변경
 function updateVisitorOptions() {
     const type = document.getElementById("transferType").value;
     const visitorSelect = document.getElementById("visitor");
 
-    // 방문자 드롭다운 옵션 업데이트
     visitorSelect.innerHTML = visitorOptions[type]
         .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
         .join('');
@@ -141,103 +135,40 @@ function updateVisitorOptions() {
     calculateDocs();
 }
 
-// 조건별 필수 서류 및 이미지 업데이트 로직
 function calculateDocs() {
     const type = document.getElementById("transferType").value;
     const visitor = document.getElementById("visitor").value;
     const docList = document.getElementById("docList");
     const imageListDiv = document.getElementById("imageList");
     
-    // 1. 이미지 업데이트 로직
     const images = (imageMap[type] && imageMap[type][visitor]) ? imageMap[type][visitor] : [];
     imageListDiv.innerHTML = images
         .map(imgSrc => `<img class="preview-image" src="${imgSrc}" alt="신청서 작성 예시">`)
         .join('');
 
-    // 2. 서류 목록 업데이트 로직
     let docs = [];
 
     if (type === "A_to_AB") {
-        // [유형 1] 단독명의(A) -> 공동명의(A+B)
         const baseDocs = ["이전등록 신청서", "자동차양도증명서", "자동차 소유권 공동명의 조서"];
-        
         switch (visitor) {
-            case "both":
-                docs = [...baseDocs, "A 신분증", "B 신분증"];
-                break;
-            case "only_B":
-                docs = [
-                    ...baseDocs,
-                    "B 신분증",
-                    "<span class='badge'>필수</span> A 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서"
-                ];
-                break;
-            case "only_A":
-                docs = [
-                    ...baseDocs,
-                    "위임장",
-                    "A 신분증",
-                    "B 신분증",
-                    "B 도장"
-                ];
-                break;
-            case "agent":
-                docs = [
-                    ...baseDocs,
-                    "위임장",
-                    "<span class='badge'>필수</span> A 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서",
-                    "B 신분증",
-                    "B 도장",
-                    "방문한 대리인 신분증"
-                ];
-                break;
+            case "both": docs = [...baseDocs, "A 신분증", "B 신분증"]; break;
+            case "only_B": docs = [...baseDocs, "B 신분증", "<span class='badge'>필수</span> A 자동차 매도용 인감증명서", "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서"]; break;
+            case "only_A": docs = [...baseDocs, "위임장", "A 신분증", "B 신분증", "B 도장"]; break;
+            case "agent": docs = [...baseDocs, "위임장", "<span class='badge'>필수</span> A 자동차 매도용 인감증명서", "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서", "B 신분증", "B 도장", "방문한 대리인 신분증"]; break;
         }
     } else if (type === "AB_to_A") {
-        // [유형 2] 공동명의(A+B) -> 단독명의(A)
         const baseDocs = ["자동차 이전등록신청서", "자동차 양도증명서"];
-        
         switch (visitor) {
-            case "both":
-                docs = [...baseDocs, "A 신분증", "B 신분증"];
-                break;
-            case "only_A":
-                docs = [
-                    ...baseDocs,
-                    "A 신분증",
-                    "<span class='badge'>필수</span> B 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> B 도장이 찍힌 자동차 양도증명서"
-                ];
-                break;
-            case "only_B":
-                docs = [
-                    ...baseDocs,
-                    "위임장",
-                    "B 신분증",
-                    "A 신분증",
-                    "A 도장"
-                ];
-                break;
-            case "agent":
-                docs = [
-                    ...baseDocs,
-                    "<span class='badge'>필수</span> B 자동차 매도용 인감증명서",
-                    "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서",
-                    "위임장",
-                    "B 신분증",
-                    "B 도장",
-                    "방문한 대리인 신분증"
-                ];
-                break;
+            case "both": docs = [...baseDocs, "A 신분증", "B 신분증"]; break;
+            case "only_A": docs = [...baseDocs, "A 신분증", "<span class='badge'>필수</span> B 자동차 매도용 인감증명서", "<span class='badge'>필수</span> B 도장이 찍힌 자동차 양도증명서"]; break;
+            case "only_B": docs = [...baseDocs, "위임장", "B 신분증", "A 신분증", "A 도장"]; break;
+            case "agent": docs = [...baseDocs, "<span class='badge'>필수</span> B 자동차 매도용 인감증명서", "<span class='badge'>필수</span> A 도장이 찍힌 자동차 양도증명서", "위임장", "B 신분증", "B 도장", "방문한 대리인 신분증"]; break;
         }
     }
 
-    // 결과 렌더링
     docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
 }
 
-// 최초 실행
 updateVisitorOptions();
 </script>
 
