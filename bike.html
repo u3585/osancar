@@ -112,10 +112,10 @@
 // 방문자 옵션 텍스트 정의
 const visitorOptions = {
     A_to_B: [
-        { value: "both", label: "판매자(A)와 구매자(B) 둘 다 방문" },
-        { value: "only_B", label: "구매자(B)만 방문 (A 미방문)" },
-        { value: "only_A", label: "판매자(A)만 방문 (B 미방문)" },
-        { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
+        { value: "both", label: "판매자와 구매자 함께 방문" },
+        { value: "only_B", label: "구매자 혼자 방문 (판매자 미방문)" },
+        { value: "only_A", label: "판매자 혼자 방문 (구매자 미방문)" },
+        { value: "agent", label: "대리인 방문 (판매자, 구매자 미방문)" }
     ],
     C_to_N: [
         { value: "only_N", label: "구매자 방문" },
@@ -178,30 +178,30 @@ function calculateDocs() {
         
         switch (visitor) {
             case "both":
-                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 판매자(A) 신분증", "<span class='highlight'>[필수]</span> 구매자(B) 신분증"];
+                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 판매자 신분증", "<span class='highlight'>[필수]</span> 구매자 신분증"];
                 break;
             case "only_B":
                 docs = [
                     ...baseDocs,
-                    "<span class='highlight'>[필수]</span> 판매자(A) 신분증", "<span class='highlight'>[필수]</span> 구매자(B) 신분증",
-                    "<span class='highlight'>[필수]</span> 판매자(A) 도장이 찍힌 자동차 양도증명서"
+                    "<span class='highlight'>[필수]</span> 판매자 신분증", "<span class='highlight'>[필수]</span> 구매자 신분증",
+                    "<span class='highlight'>[필수]</span> 판매자 도장이 찍힌 자동차 양도증명서"
                 ];
                 break;
             case "only_A":
                 docs = [
                     ...baseDocs,
-					"위임장 작성(구매자(B) 도장)",
-                    "<span class='highlight'>[필수]</span> 판매자(A) 신분증",
-                    "<span class='highlight'>[필수]</span> 구매자(B) 신분증",
-                    "<span class='highlight'>[필수]</span> 구매자(B)의 도장"
+					"위임장 작성(구매자 도장)",
+                    "<span class='highlight'>[필수]</span> 판매자 신분증",
+                    "<span class='highlight'>[필수]</span> 구매자 신분증",
+                    "<span class='highlight'>[필수]</span> 구매자의 도장"
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
                     "위임장(9번 신청서)",
-                    "<span class='highlight'>[필수]</span> 판매자(A) 신분증, 도장",
-                    "<span class='highlight'>[필수]</span> 구매자(B) 신분증, 도장",
+                    "<span class='highlight'>[필수]</span> 판매자 신분증, 도장",
+                    "<span class='highlight'>[필수]</span> 구매자 신분증, 도장",
                     "<span class='highlight'>[필수] 대리인 신분증"
                 ];
                 break;
