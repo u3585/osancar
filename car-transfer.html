@@ -54,7 +54,7 @@
         .option-group { margin: 20px 0; display: flex; flex-direction: column; gap: 12px; }
         label { font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
         input[type="checkbox"] { width: 18px; height: 18px; }
-        #result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 15px; }
+        .result-card { background: #edf2ff; border: 1px solid #bac8ff; padding: 20px; border-radius: 8px; margin-top: 15px; }
 	    .result-card h3 { margin-top: 0; color: #1c7ed6; font-size: 16px; margin-bottom: 10px; }
         /* #result-box { background: #edf2ff; border: 1px solid #bac8ff; margin-top: 0px; padding: 15px; border-radius: 8px; } */
         
@@ -93,7 +93,7 @@
         <label><input type="checkbox" id="buyerAbsence" onchange="checkDocuments()"> 🔵 양수인(신 소유자, 구매자) 미방문</label>
     </div>
 
-    <div id="result-box">
+    <div id="result-card">
         <h3>📄 신청서 작성 및 준비물 안내</h3>
         <!-- 조건 설명이 출력될 영역 추가 -->
         <p id="conditionNotice" class="condition-text"></p>
