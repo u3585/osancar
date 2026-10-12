@@ -150,40 +150,40 @@ function calculateDocs() {
 
     if (type === "R1") {
         // [유형 1] 자동차 등록증 재발급
-        const baseDocs = ["자동차 등록증 재발급 신청서(5번 신청서) 작성"];
+        const baseDocs = ["자동차 등록증 재발급 신청서 작성"];
         
         switch (visitor) {
             case "owner":
-                docs = [...baseDocs, "신분증","공동소유자 미방문 시 신분증 사본 제출"];
+                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","공동소유자 미방문 시 신분증 사본 제출"];
                 break;
             case "agent":
                 docs = [...baseDocs, 
-                    "[확인] 위임장(9번 신청서)작성 - 도장날인(본인서명사실확인서 제출 시 서명가능)",
-                    "자동차 소유자 신분증",
-                    "방문한 대리인 신분증"
+                    "[확인] 위임장 작성 - 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                    "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
+                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"
                 ];
                 break;
         }
     } else if (type === "R2") {
         // [유형 2] 등록번호판재발급등 신청서
-        const baseDocs = ["등록번호판재발급등 신청서(6번 신청서) 작성"];
+        const baseDocs = ["등록번호판재발급등 신청서 작성"];
         
         switch (visitor) {
             
             case "owner":
                 docs = [
                     ...baseDocs,
-                    "신분증",
-                    "[확인]렌탈, 리스, 캐피탈 차량의 번호판 교체는 차량 소유 회사에 먼저 연락해서 상담 받으세요.",
-                    "[확인]등록번호판 분실로 인한 재발급은 경찰서 방문 후 번호변경 신청하세요."
+                    "<span class='highlight'>[필수]</span> 신분증",
+                    "<span class='highlight'>[확인]</span> 렌탈, 리스, 캐피탈 차량의 번호판 교체는 소유회사에 문의",
+                    "<span class='highlight'>[확인]</span> 등록번호판 분실로 인한 재발급은 경찰서 방문 후 번호변경."
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
                     "[확인] 위임장(9번 신청서)작성 - 도장날인(본인서명사실확인서 제출 시 서명가능)",
-                    "자동차 소유자 신분증",
-                    "방문한 대리인 신분증"
+                    "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
+                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"
                 ];
                 break;
         }
