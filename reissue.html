@@ -46,7 +46,7 @@ select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6
 .result-card h3 { margin-top: 0; color: #1c7ed6; font-size: 16px; margin-bottom: 10px; }
 ul { margin: 0; padding-left: 20px; }
 li { margin-bottom: 8px; font-size: 14.5px; }
-.badge { background: #e63946; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: normal; margin-right: 4px; }
+ .highlight { color: #d9534f; font-weight: bold; }
 
 .image-card { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
 .image-card h3 { color: #333; font-size: 16px; margin-bottom: 15px; text-align: left; }
@@ -63,8 +63,8 @@ li { margin-bottom: 8px; font-size: 14.5px; }
     <div class="form-group">
         <label for="transferType">1. 재발급 내용을 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
-            <option value="R1">자동차등록증 재발급</option>
-            <option value="R2">자동차 등록번호판 재발급</option>
+            <option value="R1">개인 자동차등록증 재발급</option>
+            <option value="R2">개인 자동차 등록번호판 재발급</option>
         </select>
     </div>
 
@@ -158,7 +158,7 @@ function calculateDocs() {
                 break;
             case "agent":
                 docs = [...baseDocs, 
-                    "[확인] 위임장 작성 - 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
                     "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"
                 ];
@@ -175,13 +175,13 @@ function calculateDocs() {
                     ...baseDocs,
                     "<span class='highlight'>[필수]</span> 신분증",
                     "<span class='highlight'>[확인]</span> 렌탈, 리스, 캐피탈 차량의 번호판 교체는 소유회사에 문의",
-                    "<span class='highlight'>[확인]</span> 등록번호판 분실로 인한 재발급은 경찰서 방문 후 번호변경."
+                    "<span class='highlight'>[확인]</span> 등록번호판 분실로 인한 재발급은 경찰서 방문 후 번호변경."    
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "[확인] 위임장(9번 신청서)작성 - 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
                     "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"
                 ];
