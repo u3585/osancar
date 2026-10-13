@@ -57,7 +57,7 @@
 <body>
 
 <div class="card">
-    <h2>🚘 자동차 공동명의 관련 신청서 안내</h2>
+    <h2>🚘 자동차 공동명의 신청서 안내</h2>
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
@@ -95,16 +95,16 @@
 // 방문자 옵션 텍스트 정의
 const visitorOptions = {
     A_to_AB: [
-        { value: "both", label: "단독명의자(A)와 추가될 사람(B) 둘 다 방문" },
-        { value: "only_B", label: "추가될 사람(B)만 방문 (A 미방문)" },
-        { value: "only_A", label: "단독명의자(A)만 방문 (B 미방문)" },
-        { value: "agent", label: "대리인 방문 (A, B 모두 미방문)" }
+        { value: "both", label: "지분 양도인(A)와 지분 양수인(B) 함께 방문" },
+        { value: "only_B", label: "지분 양수인(B)만 방문 (A 미방문)" },
+        { value: "only_A", label: "지분 양도인(A)만 방문 (B 미방문)" },
+        { value: "agent", label: "대리인 방문 (공동명의자 모두 미방문)" }
     ],
     AB_to_A: [
-        { value: "both", label: "A와 B 둘 다 방문" },
-        { value: "only_A", label: "명의를 받는 사람(A)만 방문 (B 미방문)" },
-        { value: "only_B", label: "명의를 넘기는 사람(B)만 방문 (A 미방문)" },
-        { value: "agent", label: "대리인 방문 (둘 다 미방문)" }
+        { value: "both", label: "공동명의자 A와 B 함께 방문" },
+        { value: "only_A", label: "지분 양수인(A)만 방문 (B 미방문)" },
+        { value: "only_B", label: "지분 양도인(B)만 방문 (A 미방문)" },
+        { value: "agent", label: "대리인 방문 (공동명의자 모두 미방문)" }
     ]
 };
 
@@ -149,20 +149,20 @@ function calculateDocs() {
     let docs = [];
 
     if (type === "A_to_AB") {
-        const baseDocs = ["이전등록 신청서", "자동차양도증명서", "자동차 소유권 공동명의 조서"];
+        const baseDocs = ["이전등록 신청서 작성", "자동차양도증명서 작성", "자동차 소유권 공동명의 조서 작성"];
         switch (visitor) {
-            case "both": docs = [...baseDocs, "A 신분증", "B 신분증"]; break;
-            case "only_B": docs = [...baseDocs, "B 신분증", "<span class='highlight'>[필수]</span> A 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> A 도장이 찍힌 자동차 양도증명서"]; break;
-            case "only_A": docs = [...baseDocs, "위임장", "A 신분증", "B 신분증", "B 도장"]; break;
-            case "agent": docs = [...baseDocs, "위임장", "<span class='highlight'>[필수]</span> A 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> A 도장이 찍힌 자동차 양도증명서", "B 신분증", "B 도장", "방문한 대리인 신분증"]; break;
+            case "both": docs = [...baseDocs, "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 신분증"]; break;
+            case "only_B": docs = [...baseDocs, "<span class='highlight'>[필수]</span> B 신분증", "<span class='highlight'>[필수]</span> A 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> A 도장이 찍힌 자동차 양도증명서"]; break;
+            case "only_A": docs = [...baseDocs, "위임장 작성", "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span>B 신분증", "<span class='highlight'>[필수]</span>B 도장"]; break;
+            case "agent": docs = [...baseDocs, "위임장 작성", "<span class='highlight'>[필수]</span> A 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> A 도장이 찍힌 자동차 양도증명서", "<span class='highlight'>[필수]</span>B 신분증", "<span class='highlight'>[필수]</span>B 도장", "<span class='highlight'>[필수]</span>방문한 대리인 신분증"]; break;
         }
     } else if (type === "AB_to_A") {
-        const baseDocs = ["자동차 이전등록신청서", "자동차 양도증명서"];
+        const baseDocs = ["자동차 이전등록신청서 작성", "자동차 양도증명서 작성"];
         switch (visitor) {
-            case "both": docs = [...baseDocs, "A 신분증", "B 신분증"]; break;
-            case "only_A": docs = [...baseDocs, "A 신분증", "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서"]; break;
-            case "only_B": docs = [...baseDocs, "위임장", "B 신분증", "A 신분증", "A 도장"]; break;
-            case "agent": docs = [...baseDocs, "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> A 도장이 찍힌 자동차 양도증명서", "위임장", "B 신분증", "B 도장", "방문한 대리인 신분증"]; break;
+            case "both": docs = [...baseDocs, "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 신분증"]; break;
+            case "only_A": docs = [...baseDocs, "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서"]; break;
+            case "only_B": docs = [...baseDocs, "위임장 작성", "<span class='highlight'>[필수]</span> B 신분증", "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> A 도장"]; break;
+            case "agent": docs = [...baseDocs, "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> A 도장이 찍힌 자동차 양도증명서", "위임장 작성", "<span class='highlight'>[필수]</span>B 신분증", "B 도장", "방문한 대리인 신분증"]; break;
         }
     }
 
