@@ -143,11 +143,11 @@
                                 class="px-3.5 py-2 text-xs font-bold rounded-xl transition-all bg-white text-slate-900 shadow-xs">
                                 양도, 양수인 모두 방문
                             </button>
-                            <button type="button" onclick="selectVisitor('buyer-only')" id="visitor-btn-buyer-only"
+                            <button type="button" onclick="selectVisitor('seller-only')" id="visitor-btn-seller-only"
                                 class="px-3.5 py-2 text-xs font-medium rounded-xl transition-all text-slate-600 hover:text-slate-900">
                                 양도인(판매자)만 방문
                             </button>
-                            <button type="button" onclick="selectVisitor('agent')" id="visitor-btn-agent"
+                            <button type="button" onclick="selectVisitor('buyer-only')" id="visitor-btn-buyer-only"
                                 class="px-3.5 py-2 text-xs font-medium rounded-xl transition-all text-slate-600 hover:text-slate-900">
                                 양수인(구매자)만 방문
                             </button>
@@ -298,6 +298,17 @@
                         { name: "양수인 자동차 보험 가입필수", desc: "자동차 보험이 가입되지 않으면 자동차명의이전 불가", req: true }
                     ]
                 },
+                'seller-only': {
+                    seller: [
+                        { name: "자동차등록증 원본", desc: "실물 등록증 지참", req: true },
+                        { name: "자동차 매도용 인감증명서 1부", desc: "매수자 인적사항(성명, 주민번호, 주소) 기재 필수", req: true },
+                        { name: "양도증명서 (양도인 인감도장 날인)", desc: "미리 인감도장을 찍어서 지참", req: true }
+                    ],
+                    buyer: [
+                        { name: "신분증", desc: "방문자 본인 신분증", req: true },
+                        { name: "자동차 의무보험 가입증명서", desc: "양수인 명의 사전 가입 필수", req: true }
+                    ]
+                },
                 'buyer-only': {
                     seller: [
                         { name: "자동차등록증 원본", desc: "실물 등록증 지참", req: true },
@@ -309,6 +320,7 @@
                         { name: "자동차 의무보험 가입증명서", desc: "양수인 명의 사전 가입 필수", req: true }
                     ]
                 },
+                
                 agent: {
                     seller: [
                         { name: "자동차등록증 원본", desc: "실물 등록증", req: true },
