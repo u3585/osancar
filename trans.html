@@ -275,7 +275,7 @@
 
         // 상태값 관리
         let currentType = null;
-        let currentVisitor = 'both'; // 'both' | 'buyer-only' | 'agent'
+        let currentVisitor = 'both'; // 'both' | 'seller-only' | 'buyer-only' | 'agent'
 
         const typeTitles = {
             'person-to-person': '개인 ➔ 개인간 직거래',
@@ -479,7 +479,7 @@
         function selectVisitor(visitor) {
             currentVisitor = visitor;
             
-            ['both', 'buyer-only', 'agent'].forEach(v => {
+            ['both', 'seller-only', 'buyer-only', 'agent'].forEach(v => {
                 const btn = document.getElementById(`visitor-btn-${v}`);
                 if(v === visitor) {
                     btn.className = "px-3.5 py-2 text-xs font-bold rounded-xl transition-all bg-white text-slate-900 shadow-xs";
@@ -490,6 +490,7 @@
 
             const descMap = {
                 both: '양도인과 양수인이 공동으로 방문하는 기준',
+                'seller-only': '양도인(판매자)이 단독으로 방문하는 기준',
                 'buyer-only': '양수인(구매자)이 단독으로 방문하는 기준',
                 agent: '제3자(대리인)가 대신 방문하는 기준'
             };
