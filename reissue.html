@@ -63,8 +63,8 @@ li { margin-bottom: 8px; font-size: 14.5px; }
     <div class="form-group">
         <label for="transferType">1. 재발급 내용을 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
-            <option value="R1">개인 자동차등록증 재발급</option>
-            <option value="R2">개인 자동차 등록번호판 재발급</option>
+            <option value="R1">자동차등록증 재발급</option>
+            <option value="R2">자동차 등록번호판 재발급</option>
         </select>
     </div>
 
@@ -154,13 +154,15 @@ function calculateDocs() {
         
         switch (visitor) {
             case "owner":
-                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증 사본 제출"];
+                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증 사본 제출",
+                        "<span class='highlight'>[법인]</span> 대표자 신분증, 사업자등록증 사본"];
                 break;
             case "agent":
                 docs = [...baseDocs, 
                     "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
-                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"
+                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
+                    "<span class='highlight'>[법인]</span> 법인인감증명서, 사업자등록증 사본, 위임장(법인인감도장날인), 대리인 신분증"    
                 ];
                 break;
         }
