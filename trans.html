@@ -380,10 +380,11 @@
             'corp-to-person': {
                 both: {
                     seller: [
+                        { name: "법인대표자 신분증"},
                         { name: "자동차등록증 원본", desc: "", req: true },
-                        { name: "사업자등록증 사본", desc: "", req: true },
-                        { name: "법인등기부등본", desc: "말고사항 포함 (3개월 이내)", req: true },
-                        { name: "법인인감증명서 (자동차 매도용)", desc: "매수인 인적사항 기재 필수", req: true }
+                        { name: "사업자등록증 사본 / 법인등기부등본(말소사항 포함)", desc: "", req: true },
+                        { name: "자동차매도용 법인인감증명서", desc: "양수인인적사항 기재", req: true },
+                        { name: "법인인감도장", desc: "양도증명서 날인", req:true }
                     ],
                     buyer: [
                         { name: "신분증", desc: "", req: true },
@@ -415,14 +416,18 @@
             'corp-to-corp': {
                 both: {
                     seller: [
+                        { name: "법인대표자 신분증"},
                         { name: "자동차등록증 원본", desc: "", req: true },
-                        { name: "사업자등록증 사본 / 법인등기부등본", desc: "", req: true },
-                        { name: "법인인감증명서 (자동차 매도용)", desc: "양수 법인 정보 기재", req: true }
+                        { name: "사업자등록증 사본 / 법인등기부등본(말소사항 포함)", desc: "", req: true },
+                        { name: "자동차매도용 법인인감증명서", desc: "양수인인적사항 기재", req: true },
+                        { name: "법인인감도장", desc: "양도증명서 날인", req:true }
                     ],
                     buyer: [
-                        { name: "사업자등록증 사본 / 법인등기부등본", desc: "", req: true },
-                        { name: "법인인감증명서", desc: "", req: true },
-                        { name: "자동차 의무보험 가입증명서", desc: "", req: true }
+                        { name: "법인대표자 신분증"},
+                        { name: "법인인감증명서"},
+                        { name: "사업자등록증 사본 / 법인등기부등본(말소사항 포함)", desc: "", req: true },
+                        { name: "법인인감도장", desc: "양도증명서 날인", req:true }
+                        { name: "자동차 보험 가입필수", desc: "자동차 보험이 가입되지 않으면 자동차명의이전 불가", req: true }
                     ]
                 },
                 'buyer-only': {
