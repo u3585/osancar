@@ -278,10 +278,10 @@
         let currentVisitor = 'both'; // 'both' | 'seller-only' | 'buyer-only' | 'agent'
 
         const typeTitles = {
-            'person-to-person': '개인 ➔ 개인간 직거래',
-            'person-to-corp': '개인 ➔ 법인 매매/이전',
-            'corp-to-person': '법인 ➔ 개인 인수',
-            'corp-to-corp': '법인 ➔ 법인 양도양수'
+            'person-to-person': '개인 ➔ 개인',
+            'person-to-corp': '개인 ➔ 법인',
+            'corp-to-person': '법인 ➔ 개인',
+            'corp-to-corp': '법인 ➔ 법인'
         };
 
         // 서류 데이터베이스
@@ -311,8 +311,9 @@
                 },
                 'buyer-only': {
                     seller: [
-                        { name: "자동차 매도용 인감증명서 또는 자동차 매도용 본인서명사실확인서", desc: "매수자 인적사항 기재", req: true },
-                        { name: "자동차등록증, 주행거리 확인", desc: "차량정보 및 소유자확인, 주행거리 확인 필수", req: true }
+                        { name: "[선택 1]자동차 매도용 인감증명서 + 도장", desc: "양수인(구매자) 인적사항 기재", req: true },
+                        { name: "[선택 2]자동차 매도용 본인서명사실확인서", desc: "양수인(구매자) 인적사항 기재", req: true },
+                        { name: "자동차등록증, 주행거리 확인", desc: "차량정보 및 소유자확인, 주행거리 확인", req: true }
                         
                     ],
                     buyer: [
@@ -323,15 +324,16 @@
                 
                 agent: {
                     seller: [
-                        { name: "자동차등록증 원본", desc: "실물 등록증", req: true },
-                        { name: "자동차 매도용 인감증명서 1부", desc: "매수자 인적사항 기재 필수", req: true },
-                        { name: "위임장 (양도인 인감 날인)", desc: "양도인 인감도장 날인", req: true }
+                        { name: "[선택 1]자동차 매도용 인감증명서 + 도장", desc: "양수인(구매자) 인적사항 기재", req: true },
+                        { name: "[선택 2]자동차 매도용 본인서명사실확인서", desc: "양수인(구매자) 인적사항 기재", req: true },
+                        { name: "자동차등록증, 주행거리 확인", desc: "차량정보 및 소유자확인, 주행거리 확인", req: true }
+                        
                     ],
                     buyer: [
-                        { name: "양수인 신분증 사본 (또는 도장)", desc: "위임장 날인용", req: true },
-                        { name: "위임장 (양수인 인감/서명 날인)", desc: "대리 신청 위임용", req: true },
-                        { name: "대리인 신분증", desc: "창구 방문자 본인 확인용", req: true },
-                        { name: "자동차 의무보험 가입증명서", desc: "양수인 명의 가입", req: true }
+                        { name: "신분증", desc: "주민등록증, 운전면허증, 여권, 외국인은 외국인등록증만 유효", req: true },
+                        { name: "구매자 신분증, 구매자 도장", desc: "위임장 작성 후 구매자 도장 날인", req: true },
+                        { name: "자동차등록증, 주행거리 확인", desc: "차량정보 및 소유자확인, 주행거리 확인", req: true },
+                        { name: "대리인 신분증", desc: "대리인 확인용 신분증 지참", req:true }
                     ]
                 }
             },
