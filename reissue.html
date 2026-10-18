@@ -154,7 +154,7 @@ function calculateDocs() {
         
         switch (visitor) {
             case "owner":
-                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[조건필수]</span> 공동명의자 미방문 시 신분증 사본 제출"];
+                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증 사본 제출"];
                 break;
             case "agent":
                 docs = [...baseDocs, 
