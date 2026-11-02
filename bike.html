@@ -81,7 +81,8 @@
         <label for="transferType">1. 번호판 유무에 따라 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="A_to_B">이륜차 번호판을 그대로 명의이전</option>
-            <option value="C_to_N">폐지된 이륜차 신규등록</option>
+            <option value="C_to_N">폐지된 이륜차 등록</option>
+			<option value="New">새 이륜차 신규등록</option>
         </select>
     </div>
 
@@ -120,7 +121,11 @@ const visitorOptions = {
     C_to_N: [
         { value: "only_N", label: "구매자 방문" },
         { value: "agent", label: "대리인 방문" }
-    ]
+    ],
+	New: [
+		{ value: "only_N, label: "구매자 방문" },
+		{ value: "agent", label: "대리인 방문" }
+		]
 };
 
 // [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
@@ -139,7 +144,11 @@ const imageMap = {
         // 폐지된 이륜차 -> 신규등록 (방문자별 필요에 따라 추가 확장 가능)
         only_N: ["12_new.png", "3_c_trade.png", "bike01.png", "bike-id.png"],
         agent: ["12_new.png", "3_c_trade.png", "bike01.png", "bike-id.png", "14-9-2.png"]
-    }
+    },
+	New: {
+		only_N: ["12_new.png"],
+		agent: ["12_new.png", "14-9-2.png"]
+	}
 };
 
 // 1단계 선택에 따라 2단계 드롭다운 변경
@@ -232,7 +241,27 @@ function calculateDocs() {
                 ];
                 break;
         }
-    }
+    } else if (type === "New") {
+		// [유형 3] 새 이륜차 신규등록
+		const baseDocs = ["이륜자동차 사용신고서 작성"];
+		switch (visitor) {
+			case "New":
+				docs = [
+					...baseDocs,
+					"<span class='highlight'>[필수]</span> 소유자 신분증",
+					"<span class='highlight'>[필수]</span> 이륜차 제작증"
+					];
+				break;
+			case "agent":
+				docs = [
+					...baseDocs,
+                    "위임장 작성",
+					"<span class='highlight'>[필수]</span> 소유자 신분증",
+					"<span class='highlight'>[필수]</span> 이륜차 제작증",
+					"<span class='highlight'>[필수]</span> 대리인 신분증"
+					];
+				break;
+		}
 
     // 결과 렌더링
     docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
