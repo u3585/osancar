@@ -245,7 +245,7 @@ function calculateDocs() {
 		// [유형 3] 새 이륜차 신규등록
 		const baseDocs = ["이륜자동차 사용신고서 작성"];
 		switch (visitor) {
-			case "New":
+			case "only_N":
 				docs = [
 					...baseDocs,
 					"<span class='highlight'>[필수]</span> 소유자 신분증",
