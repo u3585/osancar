@@ -183,7 +183,7 @@ function calculateDocs() {
     // 1. 이미지 업데이트 로직
     const images = (imageMap[type] && imageMap[type][visitor]) ? imageMap[type][visitor] : [];
     imageListDiv.innerHTML = images
-        .map(imgSrc => `<img class="preview-image" src="${imgSrc}" alt="신청서 작성 예시">`)
+        .map(imgSrc => `<img class="preview-image" src="${imgSrc}" alt="신청서  예시">`)
         .join('');
 
     // 2. 서류 목록 업데이트 로직
@@ -192,7 +192,7 @@ function calculateDocs() {
     if (type === "A_to_B") {
         // [유형 1] 판매자(A) -> 구매자(B)
         conditionText = "📌 양도인, 양수인 모두 방문 했을 경우";
-        const baseDocs = ["이륜자동차 신고사항 변경신고서 작성", "자동차 양도증명서 작성"];
+        const baseDocs = ["이륜자동차 신고사항 변경신고서 ", "자동차 양도증명서 "];
         
         switch (visitor) {
             case "both":
@@ -208,7 +208,7 @@ function calculateDocs() {
             case "only_A":
                 docs = [
                     ...baseDocs,
-					"위임장 작성(구매자 도장)",
+					"위임장 (구매자 도장)",
                     "<span class='highlight'>[필수]</span> 판매자 신분증",
                     "<span class='highlight'>[필수]</span> 구매자 신분증",
                     "<span class='highlight'>[필수]</span> 구매자의 도장"
@@ -226,7 +226,7 @@ function calculateDocs() {
         }
     } else if (type === "C_to_N") {
         // [유형 2] 폐지된 이륜차 -> 신규이전등록(N)
-        const baseDocs = ["이륜자동차 사용신고서 작성", "자동차 양도증명서 작성"];
+        const baseDocs = ["이륜자동차 사용신고서 ", "자동차 양도증명서 "];
         
         switch (visitor) {
             
@@ -241,7 +241,7 @@ function calculateDocs() {
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "위임장 작성",
+                    "위임장 ",
 					"<span class='highlight'>[필수]</span> 이륜차 폐지증명서",
                     "<span class='highlight'>[필수]</span> 양도인(판매자) 신분증 사본",
                     "<span class='highlight'>[필수]</span> 양도인(판매자)의 도장이 찍힌 양도증명서",
@@ -252,7 +252,7 @@ function calculateDocs() {
         }
     } else if (type === "New") {
 		// [유형 3] 새 이륜차 신규등록
-		const baseDocs = ["이륜자동차 사용신고서 작성"];
+		const baseDocs = ["이륜자동차 사용신고서 "];
 		switch (visitor) {
 			case "only_N":
 				docs = [
@@ -264,7 +264,7 @@ function calculateDocs() {
 			case "agent":
 				docs = [
 					...baseDocs,
-                    "위임장 작성",
+                    "위임장 ",
 					"<span class='highlight'>[필수]</span> 소유자 신분증",
 					"<span class='highlight'>[필수]</span> 이륜차 제작증",
 					"<span class='highlight'>[필수]</span> 대리인 신분증"
@@ -273,7 +273,7 @@ function calculateDocs() {
 		}
       } else if (type === "Old") {
 		// [유형 4] 이륜차 폐지 신청
-		const baseDocs = ["이륜자동차 사용폐지신고서 작서"];
+		const baseDocs = ["이륜자동차 사용폐지신고서 작성"];
 		switch (visitor) {
 			case "only_O":
 				docs = [
