@@ -83,6 +83,7 @@
             <option value="A_to_B">이륜차 번호판을 그대로 명의이전</option>
             <option value="C_to_N">폐지된 이륜차 등록</option>
 			<option value="New">새 이륜차 신규등록</option>
+			<option value="Old">이륜차 폐지 신청</option>
         </select>
     </div>
 
@@ -125,7 +126,11 @@ const visitorOptions = {
 	New: [
 		{ value: "only_N", label: "구매자 방문" },
 		{ value: "agent", label: "대리인 방문" }
-		]
+		],
+	Old: [
+		{ value: "only_O", label: "소유자 방문" },
+		( value: "agent", label: "대리인 방문"}
+	]
 };
 
 // [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
@@ -148,7 +153,10 @@ const imageMap = {
 	New: {
 		only_N: ["12_new.png"],
 		agent: ["12_new.png", "14-9-2.png"]
-	}
+	},
+	 Old: {
+		 only_O: ["12.png"],
+		 agent: ["12.png", "14-9-2.png"]
 };
 
 // 1단계 선택에 따라 2단계 드롭다운 변경
@@ -262,7 +270,28 @@ function calculateDocs() {
 					];
 				break;
 		}
-      }
+      } else if (type === "Old") {
+		// [유형 4] 이륜차 폐지 신청
+		const baseDocs = ["이륜자동차 사용폐지신고서 작서"];
+		switch (visitor) {
+			case "only_O":
+				docs = [
+					...baseDocs,
+					"<span class='highlight'>[필수]</span> 소유자 신분증",
+					"<span class='highlight'>[필수]</span> 이륜차 번호판 반납"
+					];
+				break;
+			case "agent":
+				docs = [
+					...baseDocs,
+				"<span class='highlight'>[필수]</span> 위임장 작성 (소유자 도장 필수)",
+				"<span class='highlight'>[필수]</span> 소유자 신분증",
+				"<span class='highlight'>[필수]</span> 이륜차 번호판 반납"
+					];
+				break;
+		}
+	}
+
 
     // 결과 렌더링
     docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
