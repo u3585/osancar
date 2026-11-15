@@ -102,6 +102,10 @@ const visitorOptions = {
     R2: [
         { value: "owner", label: "자동차 소유자 방문" },
         { value: "agent", label: "대리인 방문" }
+    ],
+    R3: [
+        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "agent", label: "대리인 방문" }
     ]
 };
 
@@ -225,7 +229,7 @@ function calculateDocs() {
                 break;
         }
     }
-}
+
 
     // 결과 렌더링
     docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
