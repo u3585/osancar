@@ -97,7 +97,7 @@ li { margin-bottom: 8px; font-size: 14.5px; }
 const visitorOptions = {
     R1: [
         { value: "owner", label: "자동차 소유자 방문" },
-        { value: "agent", label: "대리인 방문" }        
+        { value: "agent", label: "대리인 방문" }
     ],
     R2: [
         { value: "owner", label: "자동차 소유자 방문" },
@@ -109,130 +109,150 @@ const visitorOptions = {
     ]
 };
 
-// [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
+// 신청서 이미지 매핑
 const imageMap = {
     R1: {
-        // 1. 자동차 소유자 방문
         owner: ["7.png"],
-        // 2. 대리인 방문
-        agent: ["7_1.png", "7_9.png"],
-          },
+        agent: ["7_1.png", "7_9.png"]
+    },
     R2: {
-        // 1. 자동차 소유자 방문
         owner: ["7-1.png"],
         agent: ["7-1-1.png", "7-1-9.png"]
     },
-   R3: {
-        // 1. 자동차 소유자 방문
+    R3: {
         owner: ["7-2.png"],
         agent: ["7-2-1.png", "7-2-9.png"]
     }
 };
 
-// 1단계 선택에 따라 2단계 드롭다운 변경
+// 1단계 선택에 따라 방문자 옵션 변경
 function updateVisitorOptions() {
     const type = document.getElementById("transferType").value;
     const visitorSelect = document.getElementById("visitor");
 
-    // 방문자 드롭다운 옵션 업데이트
     visitorSelect.innerHTML = visitorOptions[type]
         .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
-        .join('');
-        
+        .join("");
+
     calculateDocs();
 }
 
-// 조건별 필수 서류 및 이미지 업데이트 로직
+// 필요서류 및 이미지 표시
 function calculateDocs() {
+
     const type = document.getElementById("transferType").value;
     const visitor = document.getElementById("visitor").value;
+
     const docList = document.getElementById("docList");
     const imageListDiv = document.getElementById("imageList");
-    
-    // 1. 이미지 업데이트 로직
-    const images = (imageMap[type] && imageMap[type][visitor]) ? imageMap[type][visitor] : [];
-    imageListDiv.innerHTML = images
-        .map(imgSrc => `<img class="preview-image" src="${imgSrc}" alt="신청서 작성 예시">`)
-        .join('');
 
-    // 2. 서류 목록 업데이트 로직
+    // 이미지 표시
+    const images =
+        imageMap[type] && imageMap[type][visitor]
+            ? imageMap[type][visitor]
+            : [];
+
+    imageListDiv.innerHTML = images
+        .map(img => `<img class="preview-image" src="${img}" alt="신청서 작성 예시">`)
+        .join("");
+
     let docs = [];
 
+    // R1 자동차등록번호 변경
     if (type === "R1") {
-        // [유형 1] 자동차등록번호 변경
+
         const baseDocs = ["변경등록 신청서 작성"];
-        
+
         switch (visitor) {
+
             case "owner":
-                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증, 일반도장 지참",
-                        "<span class='highlight'>[법인]</span> 대표자 신분증, 사업자등록증 사본", "<span class='highlight'>[필수]</span> 등록번호판 반납",];
+                docs = [
+                    ...baseDocs,
+                    "<span class='highlight'>[필수]</span> 신분증",
+                    "<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증, 일반도장 지참",
+                    "<span class='highlight'>[법인]</span> 대표자 신분증, 사업자등록증 사본",
+                    "<span class='highlight'>[필수]</span> 등록번호판 반납"
+                ];
                 break;
+
             case "agent":
-                docs = [...baseDocs, 
-                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                docs = [
+                    ...baseDocs,
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명 가능)",
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
                     "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
-                    "<span class='highlight'>[법인]</span> 법인인감증명서, 사업자등록증 사본, 위임장(법인인감도장날인), 대리인 신분증", "<span class='highlight'>[필수]</span> 등록번호판 반납"    
+                    "<span class='highlight'>[법인]</span> 법인인감증명서, 사업자등록증 사본, 위임장(법인인감도장날인), 대리인 신분증",
+                    "<span class='highlight'>[필수]</span> 등록번호판 반납"
                 ];
                 break;
         }
-    } else if (type === "R2") {
-        // [유형 2] 법인, 단체, 외국인 인적사항 정보 변경
+    }
+
+    // R2 법인·단체 정보 변경
+    else if (type === "R2") {
+
         const baseDocs = ["변경등록 신청서 작성"];
-        
+
         switch (visitor) {
-            
+
             case "owner":
                 docs = [
                     ...baseDocs,
                     "<span class='highlight'>[필수]</span> 신분증 (외국인은 외국인등록증)",
                     "<span class='highlight'>[영업용 택시]</span> 신분증, 공문 지참",
-                    "<span class='highlight'>[법인]</span> 법인대표자 신분증, 사업자등록증 사본, 법인등기부등본(말소사항포함)",
+                    "<span class='highlight'>[법인]</span> 법인대표자 신분증, 사업자등록증 사본, 법인등기부등본(말소사항 포함)",
                     "<span class='highlight'>[단체]</span> 단체대표자 신분증, 고유번호증, 소속증명서 및 단체인가서, 직인증명서, 정관 및 규약, 변경에 따른 회의록",
-                    "<span class='highlight'>[국적취득변경]</span> 국적취득자 신분증, 기본증명서, 주민등록초본"    
+                    "<span class='highlight'>[국적취득변경]</span> 국적취득자 신분증, 기본증명서, 주민등록초본"
                 ];
                 break;
+
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명 가능)",
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
                     "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
-                    "<span class='highlight'>[법인]</span> 대리인 신분증, 사업자등록증 사본, 법인인감증명서, 법인등기부등본(말소사항포함), 위임장(법인인감도장날인)",
+                    "<span class='highlight'>[법인]</span> 대리인 신분증, 사업자등록증 사본, 법인인감증명서, 법인등기부등본(말소사항 포함), 위임장(법인인감도장날인)",
                     "<span class='highlight'>[단체]</span> 단체대표자 신분증, 고유번호증, 소속증명서 및 단체인가서, 직인증명서, 정관 및 규약, 변경에 따른 회의록, 대리인 신분증, 위임장(단체 직인도장 날인)",
                     "<span class='highlight'>[국적취득변경]</span> 국적취득자 신분증 사본, 기본증명서, 주민등록초본, 위임장(소유자 일반도장 날인), 대리인 신분증"
                 ];
                 break;
-        } else if (type === "R3") {
-        // [유형 3] 영업용 번호판 변경등록
+        }
+    }
+
+    // R3 영업용 번호판 변경등록
+    else if (type === "R3") {
+
         const baseDocs = ["변경등록 신청서 작성"];
-        
+
         switch (visitor) {
-            
+
             case "owner":
                 docs = [
                     ...baseDocs,
                     "<span class='highlight'>[필수]</span> 신분증",
                     "<span class='highlight'>[법인]</span> 법인대표자 신분증, 사업자등록증 사본",
                     "<span class='highlight'>[확인]</span> 렌탈, 리스, 캐피탈 차량의 번호판 교체는 소유회사에 문의",
-                    "<span class='highlight'>[확인]</span> 등록번호판 분실로 인한 재발급은 경찰서 방문 후 번호변경."    
+                    "<span class='highlight'>[확인]</span> 등록번호판 분실로 인한 재발급은 경찰서 방문 후 번호변경"
                 ];
                 break;
+
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명 가능)",
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
                     "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
-                    "<span class='highlight'>[법인]</span> 대리인 신분증, 사업자등록증 사본, 법인인감증명서, 위임장(법인인감도장날인)"                    
+                    "<span class='highlight'>[법인]</span> 대리인 신분증, 사업자등록증 사본, 법인인감증명서, 위임장(법인인감도장날인)"
                 ];
                 break;
         }
     }
 
-
-    // 결과 렌더링
-    docList.innerHTML = docs.map(doc => `<li>${doc}</li>`).join('');
+    // 결과 표시
+    docList.innerHTML = docs
+        .map(doc => `<li>${doc}</li>`)
+        .join("");
 }
 
 // 최초 실행
