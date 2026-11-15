@@ -101,13 +101,16 @@ const visitorOptions = {
         { value: "agent", label: "대리인 방문" }
     ],
     R2: [
-        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "owner", label: "이륜차 소유자 방문" },
         { value: "agent", label: "대리인 방문" }
     ],
     R3: [
-        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "owner", label: "이륜차 소유자 방문" },
         { value: "agent", label: "대리인 방문" }
-    ]
+    ],
+    R4: [
+        { value: "owner", label: "이륜차 소유자 방문" },
+        { value: "agent", label: "대리인 방문" }
 };
 
 // 신청서 이미지 매핑
@@ -164,10 +167,10 @@ function calculateDocs() {
 
     let docs = [];
 
-    // R1 자동차등록번호 변경
+    // R1 자동차등록원부
     if (type === "R1") {
 
-        const baseDocs = ["변경등록 신청서 작성"];
+        const baseDocs = ["자동차 등록원부"];
 
         switch (visitor) {
 
