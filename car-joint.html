@@ -57,7 +57,7 @@
 <body>
 
 <div class="card">
-    <h2>🚘 자동차 공동명의 신청서 안내</h2>
+    <h2>자동차 공동명의 신청서 안내</h2>
     
     <!-- 1단계: 명의 변경 유형 -->
     <div class="form-group">
@@ -65,6 +65,7 @@
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="A_to_AB">단독명의(A) ➔ 공동명의(A+B)</option>
             <option value="AB_to_A">공동명의(A+B) ➔ 단독명의(A)</option>
+            <option value="AB_to_AC">공동명의(A+B) ➔ 공동명의(A+C)</option>  
         </select>
     </div>
 
@@ -105,7 +106,14 @@ const visitorOptions = {
         { value: "only_A", label: "지분 양수인(A)만 방문 (B 미방문)" },
         { value: "only_B", label: "지분 양도인(B)만 방문 (A 미방문)" },
         { value: "agent", label: "대리인 방문 (공동명의자 모두 미방문)" }
-    ]
+    ] //,
+    // AB_to_AC: [
+      //  { value: "all", label: "공동명의자 A와 B와 추가 C 함께 방문" },
+       // { value: "only_A", label: "지분 변경없는 A 방문 (A 방문)" },
+       // { value: "only_BC", label: "지분 양도인(B)와 지분 양수인(C)만 방문 (A 미방문)" },
+       // { value: "only_B", labe: " 
+       // { value: "agent", label: "대리인 방문 (공동명의자 모두 미방문)" }
+   // ]
 };
 
 // [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
