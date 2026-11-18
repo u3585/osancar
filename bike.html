@@ -73,7 +73,7 @@
 <div class="card">
     <h2>이륜자동차 명의변경 안내</h2>
     <div class="notice-banner">
-        ⚠️ [보험 가입 후 이륜차 이전등록 가능]<br>[양도증명서 찍찍 줄긋기 고쳐 쓰기금지]<br>[양도증명서 양도인 도장 확인]
+        ⚠️ [보험 가입 후 이륜차 이전등록 가능], [양도증명서 틀린부분에 선을 긋고 다시 쓰지 금지]
     </div>
     
     <!-- 1단계: 명의 변경 유형 -->
@@ -114,13 +114,13 @@
 // 방문자 옵션 텍스트 정의
 const visitorOptions = {
     A_to_B: [
-        { value: "both", label: "판매자와 구매자 함께 방문" },
-        { value: "only_B", label: "구매자 혼자 방문 (판매자 미방문)" },
-        { value: "only_A", label: "판매자 혼자 방문 (구매자 미방문)" },
+        { value: "both", label: "양도인(판매자)와 양수인(구매자) 함께 방문" },
+        { value: "only_B", label: "양수인(구매자) 혼자 방문 (판매자 미방문)" },
+        { value: "only_A", label: "양도인(판매자) 혼자 방문 (구매자 미방문)" },
         { value: "agent", label: "대리인 방문 (판매자, 구매자 미방문)" }
     ],
     C_to_N: [
-        { value: "only_N", label: "구매자 방문" },
+        { value: "only_N", label: "양수인(구매자) 방문" },
         { value: "agent", label: "대리인 방문" }
     ],
 	New: [
@@ -201,26 +201,29 @@ function calculateDocs() {
             case "only_B":
                 docs = [
                     ...baseDocs,
-                    "<span class='highlight'>[필수]</span> 판매자 신분증", "<span class='highlight'>[필수]</span> 구매자 신분증",
-                    "<span class='highlight'>[필수]</span> 판매자 도장이 찍힌 자동차 양도증명서"
+                    "<span class='highlight'>[필수]</span> 양도인(판매자) 신분증 사본", "<span class='highlight'>[필수]</span> 구매자 신분증",
+                    "<span class='highlight'>[필수]</span> 양수인(판매자) 도장이 찍힌 자동차 양도증명서",
+					"<span class='highlight'>[절대확인]</span> 양도증명서는 계약서라 수정이 불가합니다. 잘못된 부분을 긋고 다시 쓰지 않도록 처음부터 꼼꼼히 작성하세요."
                 ];
                 break;
             case "only_A":
                 docs = [
                     ...baseDocs,
 					"위임장 (구매자 도장)",
-                    "<span class='highlight'>[필수]</span> 판매자 신분증",
-                    "<span class='highlight'>[필수]</span> 구매자 신분증",
-                    "<span class='highlight'>[필수]</span> 구매자의 도장"
+                    "<span class='highlight'>[필수]</span> 양도인(판매자) 신분증",
+                    "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증 사본",
+                    "<span class='highlight'>[필수]</span> 구매자의 도장",
+					"<span class='highlight'>[절대확인]</span> 양도증명서는 계약서라 수정이 불가합니다. 잘못된 부분을 긋고 다시 쓰지 않도록 처음부터 꼼꼼히 작성하세요."
                 ];
                 break;
             case "agent":
                 docs = [
                     ...baseDocs,
                     "위임장(9번 신청서)",
-                    "<span class='highlight'>[필수]</span> 판매자 신분증, 도장",
-                    "<span class='highlight'>[필수]</span> 구매자 신분증, 도장",
-                    "<span class='highlight'>[필수]</span> 대리인 신분증"
+                    "<span class='highlight'>[필수]</span> 양도인(판매자) 신분증 사본, 도장",
+                    "<span class='highlight'>[필수]</span> 양수인(구매자) 신분증 사본, 도장",
+                    "<span class='highlight'>[필수]</span> 대리인 신분증",
+					"<span class='highlight'>[절대확인]</span> 양도증명서는 계약서라 수정이 불가합니다. 잘못된 부분을 긋고 다시 쓰지 않도록 처음부터 꼼꼼히 작성하세요."
                 ];
                 break;
         }
@@ -247,7 +250,8 @@ function calculateDocs() {
                     "<span class='highlight'>[필수]</span> 양도인(판매자) 신분증 사본",
                     "<span class='highlight'>[필수]</span> 양도인(판매자)의 도장이 찍힌 양도증명서",
                     "<span class='highlight'>[필수]</span> 구매자 신분증",
-                    "<span class='highlight'>[필수]</span> 대리인 신분증"
+                    "<span class='highlight'>[필수]</span> 대리인 신분증",
+					"<span class='highlight'>[절대확인]</span> 양도증명서는 계약서라 수정이 불가합니다. 잘못된 부분을 긋고 다시 쓰지 않도록 처음부터 꼼꼼히 작성하세요."
                 ];
                 break;
         }
@@ -291,8 +295,8 @@ function calculateDocs() {
 				"<span class='highlight'>[필수]</span> 위임장 작성 (소유자 도장 필수)",
 				"<span class='highlight'>[필수]</span> 소유자 신분증 사본",
 				"<span class='highlight'>[필수]</span> 이륜차 번호판 반납",
-				"<span class='highlight'>[확인]</span> 번호판 반납은 미리 분해 후 반납하세요.",
-					"<span class='highlight'>[확인]</span> 이륜차 무 번호판 운행은 단속 대상입니다."
+				"<span class='highlight'>[확인]</span> 번호판은 미리 분해 후 반납하세요.",
+				"<span class='highlight'>[확인]</span> 이륜차 무 번호판 운행은 단속 대상입니다."
 					];
 				break;
 		}
