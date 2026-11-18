@@ -116,7 +116,7 @@ const visitorOptions = {
         { value: "only_AC", label: "대표자(A)와 지분 양도인(C)만 방문 (B 미방문)" },
         { value: "only_BC", label: "지분 양도인(B)와 지분 양수인(C)만 방문 (A 미방문)" },
         { value: "agent", label: "대리인 방문 (공동명의자 모두 미방문)" }
-   // ]
+   ]
 };
 
 // [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
@@ -191,9 +191,9 @@ function calculateDocs() {
             case "all": docs = [...baseDocs, "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 신분증","<span class='highlight'>[필수]</span> C 신분증"]; break;
             case "only_A": docs = [...baseDocs, "C 위임장 작성", "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서", "<span class='highlight'>[필수]</span> C 도장"]; break;
             case "only_B": docs = [...baseDocs, "C 위임장 작성", "<span class='highlight'>[필수]</span> B 신분증", "<span class='highlight'>[필수]</span> C 신분증", "<span class='highlight'>[필수]</span> A 도장"]; break;
-            case "only_C": docs = [...baseDocs, "<span class='highlight'>[필수]</span> C 신분증", <span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서"]; break;
+            case "only_C": docs = [...baseDocs, "<span class='highlight'>[필수]</span> C 신분증", "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서"]; break;
             case "only_AB": docs = [...baseDocs, "C 위임장 작성", "<span class='highlight'>[필수]</span> C 신분증", "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> C 도장"]; break;
-            case "only_AC": docs = [...baseDocs, "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서", <span class='highlight'>[필수]</span> C 신분증", "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 도장"]; break;
+            case "only_AC": docs = [...baseDocs, "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서", "<span class='highlight'>[필수]</span> C 신분증", "<span class='highlight'>[필수]</span> A 신분증", "<span class='highlight'>[필수]</span> B 도장"]; break;
             case "only_BC": docs = [...baseDocs, "<span class='highlight'>[필수]</span> B 신분증", "<span class='highlight'>[필수]</span> C 신분증"]; break; 
             case "agent": docs = [...baseDocs, "C 위임장 작성", "<span class='highlight'>[필수]</span> B 자동차 매도용 인감증명서", "<span class='highlight'>[필수]</span> B 도장이 찍힌 자동차 양도증명서", "<span class='highlight'>[필수]</span>C 신분증", "C 도장", "방문한 대리인 신분증"]; break;
         }
