@@ -63,8 +63,8 @@ li { margin-bottom: 8px; font-size: 14.5px; }
     <div class="form-group">
         <label for="transferType">1. 재발급 내용을 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
-            <option value="R1">자동차등록증 재발급</option>
             <option value="R2">자동차 등록번호판 재발급</option>
+            <option value="R1">외부장치번호판 발급</option>
         </select>
     </div>
 
@@ -108,9 +108,9 @@ const visitorOptions = {
 const imageMap = {
     R1: {
         // 1. 자동차 소유자 방문
-        owner: ["5.png"],
+        owner: ["13.png"],
         // 2. 대리인 방문
-        agent: ["5_1.png", "5_9.png"],
+        agent: ["13-1.png", "13-9.png"],
           },
     R2: {
         // 1. 자동차 소유자 방문
@@ -149,12 +149,12 @@ function calculateDocs() {
     let docs = [];
 
     if (type === "R1") {
-        // [유형 1] 자동차 등록증 재발급
-        const baseDocs = ["자동차 등록증 재발급 신청서 작성"];
+        // [유형 1] 외부장치번호판 발급
+        const baseDocs = ["외부장치번호판 신청서 작성"];
         
         switch (visitor) {
             case "owner":
-                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증 사본 제출",
+                docs = [...baseDocs, "<span class='highlight'>[필수]</span> 신분증","<span class='highlight'>[필수]</span> 외부장치 장작한 사진 제출","<span class='highlight'>[공동명의]</span> 공동명의자 미방문 시 신분증 사본 제출",
                         "<span class='highlight'>[법인]</span> 대표자 신분증, 사업자등록증 사본"];
                 break;
             case "agent":
