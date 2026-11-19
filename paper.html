@@ -63,6 +63,7 @@ li { margin-bottom: 8px; font-size: 14.5px; }
     <div class="form-group">
         <label for="transferType">1. 발급 받을 서류를 선택하세요.</label>
         <select id="transferType" onchange="updateVisitorOptions()">
+            <option value="R0">자동차등록증 재발급</option>
             <option value="R1">자동차등록원부 등본(초본) 발급 열람 신청서</option>
             <option value="R2">이륜차 사용신고필증</option>
             <option value="R3">이륜차 폐지증명서</option>
@@ -96,6 +97,10 @@ li { margin-bottom: 8px; font-size: 14.5px; }
 <script>
 // 방문자 옵션 텍스트 정의
 const visitorOptions = {
+    R0: [
+        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "agent", label: "대리인 방문" }
+    ],
     R1: [
         { value: "owner", label: "자동차 소유자 방문" },
         { value: "agent", label: "제3자 방문" }
@@ -116,6 +121,10 @@ const visitorOptions = {
 
 // 신청서 이미지 매핑
 const imageMap = {
+    R0: {
+        owner: ["5.png"],
+        agent: ["5_1.png", "5_9.png"]
+    },
     R1: {
         owner: ["4.png"],
         agent: ["4-1.png"]
@@ -168,8 +177,32 @@ function calculateDocs() {
 
     let docs = [];
 
+    // R0 자동차등록증 재발급
+    if (type === "R0") {
+
+        const baseDocs = ["자동차 등록증 재발급 신청서"];
+
+        switch (visitor) {
+
+            case "owner":
+                docs = [
+                    ...baseDocs,
+                    "<span class='highlight'>[필수]</span> 신분증"
+                    ];
+                break;
+
+            case "agent":
+                docs = [
+                    ...baseDocs,
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명 가능)",
+                    "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
+                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"  
+                ];
+                break;
+        }
+    }
     // R1 자동차등록원부
-    if (type === "R1") {
+    else if (type === "R1") {
 
         const baseDocs = ["자동차등록원부 등본(초본) 발급 열람 신청서"];
 
@@ -185,7 +218,7 @@ function calculateDocs() {
             case "agent":
                 docs = [
                     ...baseDocs,
-                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증"
+                    "<span class='highlight'>[필수]</span> 방문한 신청인 신분증"
                     
                   
                 ];
