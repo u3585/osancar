@@ -180,14 +180,14 @@ function calculateDocs() {
     // R0 자동차등록증 재발급
     if (type === "R0") {
 
-        const baseDocs = ["자동차 등록증 재발급 신청서"];
+        const baseDocs = ["자동차 등록증 재발급 신청서 작성"];
 
         switch (visitor) {
 
             case "owner":
                 docs = [
                     ...baseDocs,
-                    "<span class='highlight'>[필수]</span> 신분증"
+                    "<span class='highlight'>[필수]</span> 신분증", "<span class='highlight'>[확인]</span> 공동명의자 미 방문시 공동명의자 신분증 사본 지참"
                     ];
                 break;
 
