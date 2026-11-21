@@ -65,6 +65,7 @@ li { margin-bottom: 8px; font-size: 14.5px; }
         <select id="transferType" onchange="updateVisitorOptions()">
             <option value="R2">자동차 등록번호판 재발급</option>
             <option value="R1">외부장치번호판 발급</option>
+            <option value="R3">외부장치번호판 반납</option>
         </select>
     </div>
 
@@ -101,7 +102,11 @@ const visitorOptions = {
     R2: [
         { value: "owner", label: "자동차 소유자 방문" },
         { value: "agent", label: "대리인 방문" }
-    ]
+    ],
+    R3: [
+        { value: "owner", label: "자동차 소유자 방문" },
+        { value: "agent", label: "대리인 방문"}
+        ]
 };
 
 // [명의변경 유형] + [방문자 조합]에 따른 이미지 매핑 구조
@@ -116,6 +121,11 @@ const imageMap = {
         // 1. 자동차 소유자 방문
         owner: ["6.png"],
         agent: ["6_1.png", "6_9.png"]
+    },
+    R3: {
+        // 1. 자동차 소유자 방문
+        owner: ["13.png"],
+        agent: ["13-1.png", 13-9.png"]
     }
 };
 
@@ -149,8 +159,8 @@ function calculateDocs() {
     let docs = [];
 
     if (type === "R1") {
-        // [유형 1] 외부장치번호판 발급
-        const baseDocs = ["외부장치번호판 신청서 작성"];
+        // [유형 1] 외부장치용 등록번호판 발급
+        const baseDocs = ["외부장치용 등록번호판 발급(반납) 신청서 작성"];
         
         switch (visitor) {
             case "owner":
@@ -188,6 +198,29 @@ function calculateDocs() {
                     "<span class='highlight'>[필수]</span> 자동차 소유자 신분증",
                     "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
                     "<span class='highlight'>[법인]</span> 대리인 신분증, 사업자등록증 사본, 법인인감증명서, 위임장(법인인감도장날인)"                    
+                ];
+                break;
+        }
+    } else if (type === "R3") {
+        // [유형 3] 외부장치용 등록번호판 반납
+        const baseDocs = ["외부장치용 등록번호판 발급(반납) 신청서 작성"];
+        
+        switch (visitor) {
+            
+            case "owner":
+                docs = [
+                    ...baseDocs,
+                    "<span class='highlight'>[필수]</span> 신분증",
+                    "<span class='highlight'>[필수]</span> 등록번호판 반납"
+                ];
+                break;
+            case "agent":
+                docs = [
+                    ...baseDocs,
+                    "위임장 작성 - 소유자 도장날인(본인서명사실확인서 제출 시 서명가능)",
+                    "<span class='highlight'>[필수]</span> 자동차 소유자 신분증 사본",
+                    "<span class='highlight'>[필수]</span> 방문한 대리인 신분증",
+                    "<span class='highlight'>[필수]</span> 등록번호판 반납"                    
                 ];
                 break;
         }
